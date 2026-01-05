@@ -71,11 +71,11 @@ export default {
           ring: "hsl(var(--sidebar-ring))",
         },
       },
-      fontFamily: {
-        display: ["'Playfair Display'", "serif"],
-        sans: ["'Inter'", "sans-serif"],
-        marker: ["'Permanent Marker'", "cursive"],
-      },
+        fontFamily: {
+          display: ["'Playfair Display'", "serif"],
+          sans: ["'Inter'", "sans-serif"],
+          montserrat: ["'Montserrat'", "sans-serif"],
+        },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",

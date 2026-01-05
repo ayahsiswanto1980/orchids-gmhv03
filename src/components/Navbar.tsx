@@ -54,7 +54,7 @@ const Navbar = () => {
             ) : (
               <div className="flex flex-col">
                   <span
-                    className={`font-marker text-xl lg:text-2xl transition-colors ${
+                    className={`font-montserrat text-xl lg:text-2xl transition-colors ${
                       isScrolled ? "text-primary" : "text-gold"
                     }`}
                   >
