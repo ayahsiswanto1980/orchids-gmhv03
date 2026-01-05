@@ -79,7 +79,7 @@ const Navbar = () => {
                 <a
                   key={link.href}
                   href={link.href}
-                  className={`text-sm font-medium transition-colors hover:text-gold ${
+                  className={`text-sm font-normal transition-colors hover:text-gold ${
                     isScrolled ? "text-foreground" : "text-cream"
                   }`}
                 >
@@ -90,7 +90,7 @@ const Navbar = () => {
               {/* Auth Link Desktop */}
               <Link
                 to={user ? "/admin" : "/auth"}
-                className={`text-sm font-medium flex items-center gap-2 transition-colors hover:text-gold ${
+                className={`text-sm font-normal flex items-center gap-2 transition-colors hover:text-gold ${
                   isScrolled ? "text-foreground" : "text-cream"
                 }`}
               >

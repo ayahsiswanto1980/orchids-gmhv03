@@ -94,7 +94,7 @@ const AdminSidebar = () => {
             </div>
             {!collapsed && (
               <div className="overflow-hidden">
-                <h1 className="font-display font-bold text-sm truncate">Grand Master</h1>
+                <h1 className="font-display font-normal text-sm truncate">Grand Master</h1>
                 <p className="text-xs text-muted-foreground">Admin Panel</p>
               </div>
             )}
@@ -117,7 +117,7 @@ const AdminSidebar = () => {
                 )}
               >
                 <item.icon className="w-5 h-5 flex-shrink-0" />
-                {!collapsed && <span className="text-sm font-medium">{item.label}</span>}
+                {!collapsed && <span className="text-sm font-normal">{item.label}</span>}
               </Link>
             );
           })}
@@ -143,7 +143,7 @@ const AdminSidebar = () => {
               </Avatar>
               {!collapsed && (
                 <div className="overflow-hidden">
-                  <p className="text-sm font-medium truncate">{profile.full_name || user.email}</p>
+                  <p className="text-sm font-normal truncate">{profile.full_name || user.email}</p>
                   <p className="text-xs text-muted-foreground truncate">Lihat Profil</p>
                 </div>
               )}

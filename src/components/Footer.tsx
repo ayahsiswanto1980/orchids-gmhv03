@@ -92,7 +92,7 @@ const Footer = () => {
             {/* Badge */}
             <div className="inline-flex items-center gap-2 bg-gold/20 backdrop-blur-sm border border-gold/30 rounded-full px-5 py-2">
               <span className="w-2 h-2 bg-gold rounded-full animate-pulse" />
-              <span className="text-gold text-sm font-medium tracking-wide">Penawaran Spesial</span>
+              <span className="text-gold text-sm font-normal tracking-wide">Penawaran Spesial</span>
             </div>
             
             {/* Title */}

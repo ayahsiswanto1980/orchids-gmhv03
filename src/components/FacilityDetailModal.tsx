@@ -103,7 +103,7 @@ const FacilityDetailModal = ({ facility, isOpen, onClose, getImageUrl }: Facilit
 
           {/* Image Counter */}
           {hasMultipleImages && (
-            <div className="absolute top-4 right-4 bg-background/80 backdrop-blur-sm px-3 py-1.5 rounded-full text-sm font-medium">
+            <div className="absolute top-4 right-4 bg-background/80 backdrop-blur-sm px-3 py-1.5 rounded-full text-sm font-normal">
               {currentImageIndex + 1} / {allImages.length}
             </div>
           )}
@@ -133,7 +133,7 @@ const FacilityDetailModal = ({ facility, isOpen, onClose, getImageUrl }: Facilit
                   </div>
                   <div>
                     <p className="text-sm text-muted-foreground">Jam Operasional</p>
-                    <p className="font-medium text-foreground">{facility.operating_hours}</p>
+                    <p className="font-normal text-foreground">{facility.operating_hours}</p>
                   </div>
                 </div>
               )}
@@ -145,7 +145,7 @@ const FacilityDetailModal = ({ facility, isOpen, onClose, getImageUrl }: Facilit
                   </div>
                   <div>
                     <p className="text-sm text-muted-foreground">Kapasitas</p>
-                    <p className="font-medium text-foreground">{facility.capacity}</p>
+                    <p className="font-normal text-foreground">{facility.capacity}</p>
                   </div>
                 </div>
               )}
@@ -157,7 +157,7 @@ const FacilityDetailModal = ({ facility, isOpen, onClose, getImageUrl }: Facilit
                   </div>
                   <div>
                     <p className="text-sm text-muted-foreground">Biaya</p>
-                    <p className="font-medium text-foreground">
+                    <p className="font-normal text-foreground">
                       {new Intl.NumberFormat('id-ID', {
                         style: 'currency',
                         currency: 'IDR',
@@ -172,7 +172,7 @@ const FacilityDetailModal = ({ facility, isOpen, onClose, getImageUrl }: Facilit
           {/* Features */}
           {facility.features && facility.features.length > 0 && (
             <div className="space-y-3">
-              <h4 className="font-medium text-foreground">Fitur</h4>
+              <h4 className="font-normal text-foreground">Fitur</h4>
               <div className="flex flex-wrap gap-2">
                 {facility.features.map((feature, index) => (
                   <Badge 
@@ -190,7 +190,7 @@ const FacilityDetailModal = ({ facility, isOpen, onClose, getImageUrl }: Facilit
           {/* Thumbnail Gallery */}
           {hasMultipleImages && (
             <div className="space-y-3">
-              <h4 className="font-medium text-foreground">Galeri</h4>
+              <h4 className="font-normal text-foreground">Galeri</h4>
               <div className="grid grid-cols-4 md:grid-cols-6 gap-2">
                 {allImages.map((url, index) => (
                   <button

@@ -100,7 +100,7 @@ const HeroSection = () => {
                 />
               ))}
             </div>
-            <span className="text-gold text-sm font-medium tracking-wide">
+            <span className="text-gold text-sm font-normal tracking-wide">
               {settings.star_rating}
             </span>
           </div>
@@ -156,7 +156,7 @@ const HeroSection = () => {
                 }`}
                 style={{ transitionDelay: `${1400 + index * 150}ms` }}
               >
-                <div className="font-display text-3xl md:text-5xl text-gold font-bold group-hover:scale-110 transition-transform duration-300">
+                <div className="font-display text-3xl md:text-5xl text-gold font-normal group-hover:scale-110 transition-transform duration-300">
                   {stat.value}
                 </div>
                 <div className="text-cream/70 text-sm mt-1 group-hover:text-cream transition-colors duration-300">

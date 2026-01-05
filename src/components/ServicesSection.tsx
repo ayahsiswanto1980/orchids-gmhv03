@@ -114,7 +114,7 @@ const ServicesSection = () => {
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <span className="text-gold text-sm font-medium tracking-widest uppercase">
+          <span className="text-gold text-sm font-normal tracking-widest uppercase">
             Layanan
           </span>
           <h2 className="section-title text-foreground mt-4 mb-6">
@@ -150,8 +150,8 @@ const ServicesSection = () => {
                   
                   {service.price && (
                     <div className="mt-auto pt-3 border-t border-border flex items-center justify-between">
-                      <span className="text-xs text-muted-foreground font-medium">Biaya mulai dari</span>
-                      <span className="text-sm font-semibold text-gold">
+                      <span className="text-xs text-muted-foreground font-normal">Biaya mulai dari</span>
+                      <span className="text-sm font-normal text-gold">
                         {new Intl.NumberFormat('id-ID', {
                           style: 'currency',
                           currency: 'IDR',

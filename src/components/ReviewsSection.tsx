@@ -122,7 +122,7 @@ const ReviewsSection = () => {
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <span className="text-gold text-sm font-medium tracking-widest uppercase">
+          <span className="text-gold text-sm font-normal tracking-widest uppercase">
             Testimonial
           </span>
           <h2 className="section-title text-foreground mt-4 mb-6">
@@ -136,7 +136,7 @@ const ReviewsSection = () => {
           {/* Overall Rating */}
           {reviews.length > 0 && (
             <div className="inline-flex items-center gap-4 bg-card rounded-full px-6 py-3 shadow-soft">
-              <div className="text-3xl font-display font-bold text-foreground">
+              <div className="text-3xl font-display font-normal text-foreground">
                 {averageRating}
               </div>
               <div className="flex flex-col items-start">
@@ -192,12 +192,12 @@ const ReviewsSection = () => {
               {/* Author */}
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 bg-gold/20 rounded-full flex items-center justify-center">
-                  <span className="text-gold font-semibold text-sm">
+                  <span className="text-gold font-normal text-sm">
                     {getInitials(review.guest_name, review.guest_avatar)}
                   </span>
                 </div>
                 <div>
-                  <div className="font-semibold text-foreground">
+                  <div className="font-normal text-foreground">
                     {review.guest_name}
                   </div>
                   <div className="text-sm text-muted-foreground">

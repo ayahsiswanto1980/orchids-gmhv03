@@ -134,7 +134,7 @@ const FacilitiesSection = () => {
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <span className="text-gold text-sm font-medium tracking-widest uppercase">
+          <span className="text-gold text-sm font-normal tracking-widest uppercase">
             Fasilitas
           </span>
           <h2 className="section-title text-foreground mt-4 mb-6">
@@ -171,7 +171,7 @@ const FacilitiesSection = () => {
                 {imageCount > 1 && (
                   <div className="absolute top-4 right-4 bg-background/80 backdrop-blur-sm px-2.5 py-1.5 rounded-lg flex items-center gap-1.5">
                     <Images className="w-4 h-4 text-foreground" />
-                    <span className="text-sm font-medium text-foreground">{imageCount}</span>
+                    <span className="text-sm font-normal text-foreground">{imageCount}</span>
                   </div>
                 )}
 
@@ -190,7 +190,7 @@ const FacilitiesSection = () => {
                   </p>
                   
                   {/* View details hint */}
-                  <div className="mt-3 flex items-center gap-2 text-gold text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity">
+                  <div className="mt-3 flex items-center gap-2 text-gold text-sm font-normal opacity-0 group-hover:opacity-100 transition-opacity">
                     <span>Lihat Detail</span>
                     <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />

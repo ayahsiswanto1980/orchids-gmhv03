@@ -82,7 +82,7 @@ const RoomDetailModal = ({ room, isOpen, onClose, getImageUrl }: RoomDetailModal
           />
           
           {/* Price Badge */}
-          <div className="absolute top-4 left-4 bg-gold text-primary px-4 py-2 rounded-xl text-lg font-bold shadow-lg">
+          <div className="absolute top-4 left-4 bg-gold text-primary px-4 py-2 rounded-xl text-lg font-normal shadow-lg">
             {formatPrice(room.price)}<span className="text-sm font-normal">/malam</span>
           </div>
           
@@ -125,7 +125,7 @@ const RoomDetailModal = ({ room, isOpen, onClose, getImageUrl }: RoomDetailModal
 
           {/* Image Counter */}
           {hasMultipleImages && (
-            <div className="absolute top-4 right-4 bg-background/80 backdrop-blur-sm px-3 py-1.5 rounded-full text-sm font-medium">
+            <div className="absolute top-4 right-4 bg-background/80 backdrop-blur-sm px-3 py-1.5 rounded-full text-sm font-normal">
               {currentImageIndex + 1} / {allImages.length}
             </div>
           )}
@@ -163,7 +163,7 @@ const RoomDetailModal = ({ room, isOpen, onClose, getImageUrl }: RoomDetailModal
               </div>
               <div>
                 <p className="text-sm text-muted-foreground">Kapasitas</p>
-                <p className="font-medium text-foreground">{room.capacity || '2 Tamu'}</p>
+                <p className="font-normal text-foreground">{room.capacity || '2 Tamu'}</p>
               </div>
             </div>
             
@@ -173,7 +173,7 @@ const RoomDetailModal = ({ room, isOpen, onClose, getImageUrl }: RoomDetailModal
               </div>
               <div>
                 <p className="text-sm text-muted-foreground">Luas Kamar</p>
-                <p className="font-medium text-foreground">{room.room_size || '28 m²'}</p>
+                <p className="font-normal text-foreground">{room.room_size || '28 m²'}</p>
               </div>
             </div>
             
@@ -183,7 +183,7 @@ const RoomDetailModal = ({ room, isOpen, onClose, getImageUrl }: RoomDetailModal
               </div>
               <div>
                 <p className="text-sm text-muted-foreground">Tipe Kasur</p>
-                <p className="font-medium text-foreground">{room.bed_type || 'King Size'}</p>
+                <p className="font-normal text-foreground">{room.bed_type || 'King Size'}</p>
               </div>
             </div>
           </div>
@@ -191,7 +191,7 @@ const RoomDetailModal = ({ room, isOpen, onClose, getImageUrl }: RoomDetailModal
           {/* Features/Amenities */}
           {room.features && room.features.length > 0 && (
             <div className="space-y-3">
-              <h4 className="font-medium text-foreground">Fasilitas Kamar</h4>
+              <h4 className="font-normal text-foreground">Fasilitas Kamar</h4>
               <div className="flex flex-wrap gap-2">
                 {room.features.map((feature, index) => (
                   <Badge 
@@ -209,7 +209,7 @@ const RoomDetailModal = ({ room, isOpen, onClose, getImageUrl }: RoomDetailModal
           {/* Thumbnail Gallery */}
           {hasMultipleImages && (
             <div className="space-y-3">
-              <h4 className="font-medium text-foreground">Galeri</h4>
+              <h4 className="font-normal text-foreground">Galeri</h4>
               <div className="grid grid-cols-4 md:grid-cols-6 gap-2">
                 {allImages.map((url, index) => (
                   <button

@@ -42,7 +42,7 @@ const LocationSection = () => {
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <span className="text-gold text-sm font-medium tracking-widest uppercase">
+          <span className="text-gold text-sm font-normal tracking-widest uppercase">
             Lokasi
           </span>
           <h2 className="section-title text-foreground mt-4 mb-6">
@@ -83,7 +83,7 @@ const LocationSection = () => {
             <div className="absolute inset-0 bg-gradient-to-t from-navy/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-10" />
             
             {/* Location pin badge */}
-            <div className="absolute top-4 left-4 bg-gold text-navy px-4 py-2 rounded-full font-semibold text-sm z-20 shadow-lg flex items-center gap-2">
+            <div className="absolute top-4 left-4 bg-gold text-navy px-4 py-2 rounded-full font-normal text-sm z-20 shadow-lg flex items-center gap-2">
               <MapPin className="w-4 h-4" />
               {settings.hotel_name}
             </div>

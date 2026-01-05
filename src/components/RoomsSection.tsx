@@ -142,7 +142,7 @@ const RoomsSection = () => {
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <span className="text-gold text-sm font-medium tracking-widest uppercase">
+          <span className="text-gold text-sm font-normal tracking-widest uppercase">
             Akomodasi
           </span>
           <h2 className="section-title text-foreground mt-4 mb-6">
@@ -173,7 +173,7 @@ const RoomsSection = () => {
                     alt={room.name}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                   />
-                  <div className="absolute top-4 right-4 bg-gold text-primary px-3 py-1 rounded-full text-sm font-semibold">
+                  <div className="absolute top-4 right-4 bg-gold text-primary px-3 py-1 rounded-full text-sm font-normal">
                     {formatPrice(room.price)}/malam
                   </div>
                   
@@ -181,13 +181,13 @@ const RoomsSection = () => {
                   {imageCount > 1 && (
                     <div className="absolute top-4 left-4 bg-background/80 backdrop-blur-sm px-2.5 py-1.5 rounded-lg flex items-center gap-1.5">
                       <Images className="w-4 h-4 text-foreground" />
-                      <span className="text-sm font-medium text-foreground">{imageCount}</span>
+                      <span className="text-sm font-normal text-foreground">{imageCount}</span>
                     </div>
                   )}
 
                   {/* View details overlay */}
                   <div className="absolute inset-0 bg-primary/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                    <span className="text-cream font-medium flex items-center gap-2">
+                    <span className="text-cream font-normal flex items-center gap-2">
                       Lihat Detail
                       <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />

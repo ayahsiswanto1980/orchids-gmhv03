@@ -282,7 +282,7 @@ const Services = () => {
                 <TableBody>
                   {services.map((service) => (
                       <TableRow key={service.id}>
-                        <TableCell className="font-medium">{service.title}</TableCell>
+                        <TableCell className="font-normal">{service.title}</TableCell>
                         <TableCell>{service.icon || '-'}</TableCell>
                         <TableCell>
                           {service.price ? (

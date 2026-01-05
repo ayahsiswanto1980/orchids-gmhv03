@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -112,24 +112,24 @@
   }
 
   body {
-    @apply bg-background text-foreground font-sans antialiased;
+    @apply bg-background text-foreground font-sans antialiased font-normal;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-sans;
+    @apply font-sans font-normal;
   }
 
-  /* Section titles - consistent Marker font */
+  /* Section titles - consistent Montserrat Regular font */
   .section-title {
-    @apply font-marker text-3xl md:text-5xl lg:text-6xl font-normal;
+    @apply font-sans text-3xl md:text-5xl lg:text-6xl font-normal;
   }
 
   .card-title {
-    @apply font-sans text-lg lg:text-xl font-semibold tracking-tight;
+    @apply font-sans text-lg lg:text-xl font-normal tracking-tight;
   }
 
   .column-title {
-    @apply font-sans text-lg font-semibold tracking-tight;
+    @apply font-sans text-lg font-normal tracking-tight;
   }
 
   .scroll-reveal-left {
@@ -168,11 +168,15 @@
 
 @layer utilities {
   .font-display {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Montserrat', sans-serif;
   }
 
   .font-sans {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .font-marker {
+    font-family: 'Montserrat', sans-serif;
   }
 
   .text-gradient-gold {
