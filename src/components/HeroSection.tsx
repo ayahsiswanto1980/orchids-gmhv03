@@ -53,7 +53,7 @@ const HeroSection = () => {
       <div className="relative z-10 container mx-auto px-4 text-center pt-24 md:pt-28">
         <div className="max-w-4xl mx-auto">
           {/* Title with Staggered Animation */}
-          <h1 className="font-montserrat text-4xl md:text-6xl lg:text-7xl text-cream mb-6">
+          <h1 className="font-marker text-4xl md:text-6xl lg:text-7xl text-cream mb-6">
             <span 
               className={`block transition-all duration-1000 ${
                 isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"

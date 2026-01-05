@@ -97,7 +97,7 @@ const Footer = () => {
             
             {/* Title */}
             <div className="max-w-2xl">
-              <h3 className="font-montserrat text-3xl md:text-4xl lg:text-5xl text-cream mb-4 leading-tight">
+              <h3 className="font-marker text-3xl md:text-4xl lg:text-5xl text-cream mb-4 leading-tight">
                 Siap untuk Pengalaman{" "}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold via-gold-light to-gold">
                   Tak Terlupakan?
@@ -160,7 +160,7 @@ const Footer = () => {
             {/* Brand */}
             <div>
               <div className="mb-6">
-                <span className="font-montserrat text-2xl text-gold">
+                <span className="font-marker text-2xl text-gold">
                   {settings.hotel_name.split(' ').slice(0, 2).join(' ')}
                 </span>
                 <div className="text-xs tracking-[0.2em] uppercase text-primary-foreground/60">
@@ -175,7 +175,7 @@ const Footer = () => {
 
           {/* Social Media Column (Replacing Layanan/Navigasi) */}
           <div>
-            <h4 className="font-montserrat text-lg mb-6 text-gold">
+            <h4 className="font-marker text-lg mb-6 text-gold">
               Social Media
             </h4>
             <ul className="space-y-4">
@@ -205,7 +205,7 @@ const Footer = () => {
 
           {/* Layanan Column (Integrated with Database) */}
           <div>
-            <h4 className="font-montserrat text-lg mb-6 text-gold">
+            <h4 className="font-marker text-lg mb-6 text-gold">
               Layanan
             </h4>
             <ul className="space-y-3">
@@ -237,7 +237,7 @@ const Footer = () => {
 
           {/* Newsletter */}
           <div>
-            <h4 className="font-montserrat text-lg mb-6 text-gold">
+            <h4 className="font-marker text-lg mb-6 text-gold">
               Newsletter
             </h4>
             <p className="text-primary-foreground/70 text-sm mb-4">

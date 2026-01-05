@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -119,9 +119,9 @@
     @apply font-sans;
   }
 
-  /* Section titles - consistent Montserrat font */
+  /* Section titles - consistent Marker font */
   .section-title {
-    @apply font-montserrat text-3xl md:text-5xl lg:text-6xl font-bold tracking-tight;
+    @apply font-marker text-3xl md:text-5xl lg:text-6xl font-normal;
   }
 
   .card-title {

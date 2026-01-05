@@ -155,12 +155,12 @@ const Auth = () => {
             <div className="w-12 h-12 bg-gold/20 backdrop-blur-md rounded-xl flex items-center justify-center border border-gold/30">
               <Hotel className="w-6 h-6 text-gold" />
             </div>
-            <h1 className="font-montserrat text-3xl text-cream tracking-tight">
+            <h1 className="font-marker text-3xl text-cream tracking-tight">
               Grand Master
             </h1>
           </div>
           
-          <h2 className="text-4xl xl:text-5xl font-montserrat text-cream mb-6 leading-tight max-w-md">
+          <h2 className="text-4xl xl:text-5xl font-marker text-cream mb-6 leading-tight max-w-md">
             Kelola Pengalaman <span className="text-gold">Mewah</span> Tamu Anda
           </h2>
           <p className="text-cream/70 text-lg max-w-md leading-relaxed">
@@ -210,7 +210,7 @@ const Auth = () => {
 
           <div className="mx-auto w-full max-w-[400px] space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
             <div className="space-y-2">
-              <h3 className="text-3xl font-montserrat tracking-tight">Selamat Datang</h3>
+              <h3 className="text-3xl font-marker tracking-tight">Selamat Datang</h3>
               <p className="text-muted-foreground">Silakan masuk ke akun Anda untuk melanjutkan.</p>
             </div>
 
