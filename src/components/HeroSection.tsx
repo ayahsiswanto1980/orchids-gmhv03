@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { Star } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Star, ChevronDown } from "lucide-react";
 import { useSiteSettings } from "@/hooks/useSiteSettings";
 import heroImageDefault from "@/assets/hero-hotel.jpg";
 
@@ -102,6 +103,29 @@ const HeroSection = () => {
       {/* Content Overlay */}
       <div className="relative z-20 h-full container mx-auto px-4 flex items-center">
         <div className="max-w-3xl">
+          {/* Rating Badge */}
+          <div 
+            className={`inline-flex items-center gap-2 bg-gold/20 backdrop-blur-md border border-gold/30 rounded-full px-5 py-2.5 mb-10 transition-all duration-1000 ${
+              isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+            }`}
+            style={{ transitionDelay: "200ms" }}
+          >
+            <div className="flex gap-0.5">
+              {[1, 2, 3, 4].map((star, index) => (
+                <Star
+                  key={star}
+                  className={`w-4 h-4 fill-gold text-gold transition-all duration-500 ${
+                    isLoaded ? "opacity-100 scale-100" : "opacity-0 scale-0"
+                  }`}
+                  style={{ transitionDelay: `${300 + index * 100}ms` }}
+                />
+              ))}
+            </div>
+            <span className="text-gold text-sm font-normal tracking-wide">
+              {settings.star_rating}
+            </span>
+          </div>
+
           <h1 className="font-sans text-4xl md:text-6xl lg:text-7xl text-cream mb-6 drop-shadow-2xl">
             <span 
               className={`block transition-all duration-1000 ${
@@ -130,32 +154,30 @@ const HeroSection = () => {
             {settings.description}
           </p>
 
-          {/* Rating Badge */}
           <div 
-            className={`inline-flex items-center gap-2 bg-gold/20 backdrop-blur-md border border-gold/30 rounded-full px-5 py-2.5 mb-6 transition-all duration-1000 ${
+            className={`flex flex-col sm:flex-row items-center gap-4 transition-all duration-1000 ${
               isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
             }`}
             style={{ transitionDelay: "1000ms" }}
           >
-            <div className="flex gap-0.5">
-              {[1, 2, 3, 4].map((star, index) => (
-                <Star
-                  key={star}
-                  className={`w-4 h-4 fill-gold text-gold transition-all duration-500 ${
-                    isLoaded ? "opacity-100 scale-100" : "opacity-0 scale-0"
-                  }`}
-                  style={{ transitionDelay: `${1100 + index * 100}ms` }}
-                />
-              ))}
-            </div>
-            <span className="text-gold text-sm font-normal tracking-wide">
-              {settings.star_rating}
-            </span>
+            <a href={whatsappLink} target="_blank" rel="noopener noreferrer">
+              <Button size="xl" variant="gold" className="group shadow-xl shadow-gold/20">
+                Pesan Sekarang
+              </Button>
+            </a>
+            <Button 
+              size="xl" 
+              variant="outline" 
+              className="bg-white/10 backdrop-blur-md border-white/20 text-white hover:bg-white/20"
+              onClick={() => document.getElementById('kamar')?.scrollIntoView({ behavior: 'smooth' })}
+            >
+              Lihat Kamar
+            </Button>
           </div>
 
           {/* Stats Section */}
           <div 
-            className={`grid grid-cols-3 gap-8 md:gap-12 max-w-xl mt-0 transition-all duration-1000 ${
+            className={`grid grid-cols-3 gap-8 md:gap-12 max-w-xl mt-16 transition-all duration-1000 ${
               isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
             }`}
             style={{ transitionDelay: "1200ms" }}
