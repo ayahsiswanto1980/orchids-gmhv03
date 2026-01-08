@@ -9,13 +9,6 @@ interface Service {
   title: string;
 }
 
-interface FooterLogo {
-  id: string;
-  name: string;
-  image_url: string;
-  link_url: string | null;
-}
-
 const TikTokIcon = ({ className }: { className?: string }) => (
   <svg className={className} viewBox="0 0 24 24" fill="currentColor">
     <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.4a6.84 6.84 0 00-1-.05A6.33 6.33 0 005 20.1a6.34 6.34 0 0010.86-4.43v-7a8.16 8.16 0 004.77 1.52v-3.4a4.85 4.85 0 01-1-.1z"/>
@@ -26,7 +19,6 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
   const { settings } = useSiteSettings();
   const [services, setServices] = useState<Service[]>([]);
-  const [logos, setLogos] = useState<FooterLogo[]>([]);
 
   useEffect(() => {
     const fetchServices = async () => {
@@ -42,24 +34,11 @@ const Footer = () => {
       }
     };
 
-    const fetchLogos = async () => {
-      const { data, error } = await supabase
-        .from('footer_logos')
-        .select('id, name, image_url, link_url')
-        .eq('is_active', true)
-        .order('sort_order', { ascending: true });
-
-      if (!error && data) {
-        setLogos(data);
-      }
-    };
-
     fetchServices();
-    fetchLogos();
 
     // Subscribe to realtime changes
     const channel = supabase
-      .channel('footer-changes')
+      .channel('footer-services-changes')
       .on(
         'postgres_changes',
         {
@@ -69,17 +48,6 @@ const Footer = () => {
         },
         () => {
           fetchServices();
-        }
-      )
-      .on(
-        'postgres_changes',
-        {
-          event: '*',
-          schema: 'public',
-          table: 'footer_logos'
-        },
-        () => {
-          fetchLogos();
         }
       )
       .subscribe();
@@ -288,42 +256,6 @@ const Footer = () => {
           </div>
         </div>
       </div>
-
-      {/* Partner Logos */}
-      {logos.length > 0 && (
-        <div className="border-t border-primary-foreground/10 bg-primary/30">
-          <div className="container mx-auto px-4 py-8">
-            <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12 opacity-60 hover:opacity-100 transition-opacity duration-500">
-              {logos.map((logo) => (
-                <div key={logo.id} className="group flex items-center justify-center">
-                  {logo.link_url ? (
-                    <a 
-                      href={logo.link_url} 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="transition-all duration-300 transform group-hover:scale-110 grayscale group-hover:grayscale-0"
-                    >
-                      <img 
-                        src={logo.image_url} 
-                        alt={logo.name} 
-                        className="h-10 w-auto object-contain max-w-[120px]" 
-                      />
-                    </a>
-                  ) : (
-                    <div className="transition-all duration-300 grayscale group-hover:grayscale-0">
-                      <img 
-                        src={logo.image_url} 
-                        alt={logo.name} 
-                        className="h-10 w-auto object-contain max-w-[120px]" 
-                      />
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      )}
 
       {/* Bottom Bar */}
       <div className="border-t border-primary-foreground/10">

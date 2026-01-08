@@ -18,11 +18,14 @@ export interface SiteSettings {
   email: string;
   address: string;
   google_maps_url: string;
+  hero_image_url: string;
+  hero_video_url: string;
+  hero_right_image_top: string;
+  hero_right_image_bottom: string;
   hero_stats: Array<{ value: string; label: string }>;
   star_rating: string;
   check_in_time: string;
   check_out_time: string;
-  hero_image_url: string;
   logo_url: string;
   social_media: SocialMedia;
 }
@@ -45,6 +48,9 @@ const defaultSettings: SiteSettings = {
   check_in_time: '14:00 WIB',
   check_out_time: '12:00 WIB',
   hero_image_url: '',
+  hero_video_url: 'https://www.youtube.com/watch?v=olZku1LeaCw',
+  hero_right_image_top: '',
+  hero_right_image_bottom: '',
   logo_url: '',
   social_media: {
     facebook: '',
@@ -71,9 +77,7 @@ export const useSiteSettings = () => {
         if (data && data.length > 0) {
           const settingsMap: Record<string, any> = {};
           data.forEach((item) => {
-            // Handle JSONB values - they come already parsed from Supabase
             const value = item.value;
-            // If it's a string that looks like JSON, parse it
             if (typeof value === 'string') {
               try {
                 settingsMap[item.key] = JSON.parse(value);
@@ -81,7 +85,6 @@ export const useSiteSettings = () => {
                 settingsMap[item.key] = value;
               }
             } else {
-              // Already parsed by Supabase (JSONB)
               settingsMap[item.key] = value;
             }
           });
@@ -100,6 +103,9 @@ export const useSiteSettings = () => {
             check_in_time: String(settingsMap.check_in_time ?? defaultSettings.check_in_time),
             check_out_time: String(settingsMap.check_out_time ?? defaultSettings.check_out_time),
             hero_image_url: String(settingsMap.hero_image_url ?? defaultSettings.hero_image_url),
+            hero_video_url: String(settingsMap.hero_video_url ?? defaultSettings.hero_video_url),
+            hero_right_image_top: String(settingsMap.hero_right_image_top ?? defaultSettings.hero_right_image_top),
+            hero_right_image_bottom: String(settingsMap.hero_right_image_bottom ?? defaultSettings.hero_right_image_bottom),
             logo_url: String(settingsMap.logo_url ?? defaultSettings.logo_url),
             social_media: settingsMap.social_media && typeof settingsMap.social_media === 'object' 
               ? { ...defaultSettings.social_media, ...settingsMap.social_media }
@@ -115,7 +121,6 @@ export const useSiteSettings = () => {
 
     fetchSettings();
 
-    // Subscribe to realtime updates
     const channel = supabase
       .channel('site_settings_changes')
       .on(
@@ -126,7 +131,6 @@ export const useSiteSettings = () => {
           table: 'site_settings'
         },
         () => {
-          // Refetch settings when there's a change
           fetchSettings();
         }
       )

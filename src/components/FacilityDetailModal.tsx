@@ -112,7 +112,7 @@ const FacilityDetailModal = ({ facility, isOpen, onClose, getImageUrl }: Facilit
         {/* Content */}
         <div className="p-6 space-y-6">
           <DialogHeader>
-            <DialogTitle className="font-sans text-2xl md:text-3xl text-foreground">
+            <DialogTitle className="font-display text-2xl md:text-3xl text-foreground">
               {facility.name}
             </DialogTitle>
           </DialogHeader>
@@ -124,50 +124,50 @@ const FacilityDetailModal = ({ facility, isOpen, onClose, getImageUrl }: Facilit
             </p>
           )}
 
-            {/* Info Cards */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {facility.operating_hours && (
-                <div className="flex items-center gap-3 p-4 bg-secondary/50 rounded-xl">
-                  <div className="w-10 h-10 bg-gold/20 rounded-lg flex items-center justify-center">
-                    <Clock className="w-5 h-5 text-gold" />
-                  </div>
-                  <div>
-                    <p className="text-sm text-muted-foreground">Jam Operasional</p>
-                    <p className="font-normal text-foreground">{facility.operating_hours}</p>
-                  </div>
+          {/* Info Cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {facility.operating_hours && (
+              <div className="flex items-center gap-3 p-4 bg-secondary/50 rounded-xl">
+                <div className="w-10 h-10 bg-gold/20 rounded-lg flex items-center justify-center">
+                  <Clock className="w-5 h-5 text-gold" />
                 </div>
-              )}
-              
-              {facility.capacity && (
-                <div className="flex items-center gap-3 p-4 bg-secondary/50 rounded-xl">
-                  <div className="w-10 h-10 bg-gold/20 rounded-lg flex items-center justify-center">
-                    <Users className="w-5 h-5 text-gold" />
-                  </div>
-                  <div>
-                    <p className="text-sm text-muted-foreground">Kapasitas</p>
-                    <p className="font-normal text-foreground">{facility.capacity}</p>
-                  </div>
+                <div>
+                  <p className="text-sm text-muted-foreground">Jam Operasional</p>
+                  <p className="font-normal text-foreground">{facility.operating_hours}</p>
                 </div>
-              )}
+              </div>
+            )}
+            
+            {facility.capacity && (
+              <div className="flex items-center gap-3 p-4 bg-secondary/50 rounded-xl">
+                <div className="w-10 h-10 bg-gold/20 rounded-lg flex items-center justify-center">
+                  <Users className="w-5 h-5 text-gold" />
+                </div>
+                <div>
+                  <p className="text-sm text-muted-foreground">Kapasitas</p>
+                  <p className="font-normal text-foreground">{facility.capacity}</p>
+                </div>
+              </div>
+            )}
 
-              {facility.price && (
-                <div className="flex items-center gap-3 p-4 bg-secondary/50 rounded-xl">
-                  <div className="w-10 h-10 bg-gold/20 rounded-lg flex items-center justify-center">
-                    <Wallet className="w-5 h-5 text-gold" />
-                  </div>
-                  <div>
-                    <p className="text-sm text-muted-foreground">Biaya</p>
-                    <p className="font-normal text-foreground">
-                      {new Intl.NumberFormat('id-ID', {
-                        style: 'currency',
-                        currency: 'IDR',
-                        maximumFractionDigits: 0
-                      }).format(facility.price)}
-                    </p>
-                  </div>
+            {facility.price && (
+              <div className="flex items-center gap-3 p-4 bg-secondary/50 rounded-xl">
+                <div className="w-10 h-10 bg-gold/20 rounded-lg flex items-center justify-center">
+                  <Wallet className="w-5 h-5 text-gold" />
                 </div>
-              )}
-            </div>
+                <div>
+                  <p className="text-sm text-muted-foreground">Biaya</p>
+                  <p className="font-normal text-foreground">
+                    {new Intl.NumberFormat('id-ID', {
+                      style: 'currency',
+                      currency: 'IDR',
+                      maximumFractionDigits: 0
+                    }).format(facility.price)}
+                  </p>
+                </div>
+              </div>
+            )}
+          </div>
 
           {/* Features */}
           {facility.features && facility.features.length > 0 && (

@@ -5,6 +5,7 @@ import FacilitiesSection from "@/components/FacilitiesSection";
 import ServicesSection from "@/components/ServicesSection";
 import ReviewsSection from "@/components/ReviewsSection";
 import LocationSection from "@/components/LocationSection";
+import PartnerLogos from "@/components/PartnerLogos";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import useScrollReveal from "@/hooks/useScrollReveal";
@@ -31,6 +32,7 @@ const Index = () => {
       <div className="scroll-reveal">
         <LocationSection />
       </div>
+      <PartnerLogos />
       <Footer />
       <WhatsAppButton />
     </main>

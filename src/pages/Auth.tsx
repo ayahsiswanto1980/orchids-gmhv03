@@ -47,7 +47,6 @@ const Auth = () => {
   const [signupErrors, setSignupErrors] = useState<Record<string, string>>({});
 
   useEffect(() => {
-    // Only redirect if we're sure the user is an admin
     if (user && !adminLoading && isAdmin) {
       navigate('/admin');
     }
@@ -148,7 +147,7 @@ const Auth = () => {
         <div className="relative z-10">
           <Link to="/" className="inline-flex items-center gap-2 text-gold hover:text-gold/80 transition-colors mb-12 group">
             <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-            <span className="text-sm font-medium">Kembali ke Beranda</span>
+            <span className="text-sm font-normal">Kembali ke Beranda</span>
           </Link>
           
           <div className="flex items-center gap-3 mb-6">
@@ -174,7 +173,7 @@ const Auth = () => {
               <CheckCircle2 className="w-4 h-4 text-gold" />
             </div>
             <div>
-              <p className="text-cream font-medium">Manajemen Real-time</p>
+              <p className="text-cream font-normal">Manajemen Real-time</p>
               <p className="text-cream/50 text-sm">Update ketersediaan kamar dan layanan secara instan.</p>
             </div>
           </div>
@@ -183,7 +182,7 @@ const Auth = () => {
               <CheckCircle2 className="w-4 h-4 text-gold" />
             </div>
             <div>
-              <p className="text-cream font-medium">Analitik Mendalam</p>
+              <p className="text-cream font-normal">Analitik Mendalam</p>
               <p className="text-cream/50 text-sm">Pahami preferensi tamu melalui ulasan dan data.</p>
             </div>
           </div>
@@ -201,18 +200,18 @@ const Auth = () => {
         <div className="lg:hidden flex items-center justify-between mb-12">
           <div className="flex items-center gap-2">
             <Hotel className="w-6 h-6 text-gold" />
-            <span className="font-display font-bold text-lg">Grand Master</span>
+            <span className="font-display font-normal text-lg">Grand Master</span>
           </div>
           <Link to="/" className="p-2 hover:bg-muted rounded-full transition-colors">
             <ArrowLeft className="w-5 h-5" />
           </Link>
         </div>
 
-          <div className="mx-auto w-full max-w-[400px] space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
-            <div className="space-y-2">
-              <h3 className="text-3xl font-marker tracking-tight">Selamat Datang</h3>
-              <p className="text-muted-foreground">Silakan masuk ke akun Anda untuk melanjutkan.</p>
-            </div>
+        <div className="mx-auto w-full max-w-[400px] space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
+          <div className="space-y-2">
+            <h3 className="text-3xl font-marker tracking-tight">Selamat Datang</h3>
+            <p className="text-muted-foreground">Silakan masuk ke akun Anda untuk melanjutkan.</p>
+          </div>
 
           <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
             <TabsList className="grid w-full grid-cols-2 mb-8 h-12 p-1 bg-muted/50 rounded-lg">
@@ -253,7 +252,7 @@ const Auth = () => {
                 <div className="space-y-2 group">
                   <div className="flex items-center justify-between">
                     <Label htmlFor="login-password" className="group-focus-within:text-gold transition-colors">Kata Sandi</Label>
-                    <button type="button" className="text-xs text-gold hover:underline font-medium">Lupa sandi?</button>
+                    <button type="button" className="text-xs text-gold hover:underline font-normal">Lupa sandi?</button>
                   </div>
                   <div className="relative">
                     <Input
@@ -282,7 +281,7 @@ const Auth = () => {
                 
                 <Button 
                   type="submit" 
-                  className="w-full h-12 bg-gold hover:bg-gold-dark text-navy font-bold text-base transition-all duration-300 shadow-lg shadow-gold/10 active:scale-[0.98]"
+                  className="w-full h-12 bg-gold hover:bg-gold-dark text-navy font-normal text-base transition-all duration-300 shadow-lg shadow-gold/10 active:scale-[0.98]"
                   disabled={isLoading}
                 >
                   {isLoading ? (
@@ -382,7 +381,7 @@ const Auth = () => {
                 
                 <Button 
                   type="submit" 
-                  className="w-full h-12 bg-gold hover:bg-gold-dark text-navy font-bold text-base transition-all duration-300 shadow-lg shadow-gold/10 active:scale-[0.98]"
+                  className="w-full h-12 bg-gold hover:bg-gold-dark text-navy font-normal text-base transition-all duration-300 shadow-lg shadow-gold/10 active:scale-[0.98]"
                   disabled={isLoading}
                 >
                   {isLoading ? (
@@ -405,10 +404,10 @@ const Auth = () => {
               <span className="w-8 h-px bg-muted" />
             </p>
             <div className="flex items-center justify-center gap-4">
-              <Button variant="outline" size="sm" className="h-9 px-4 rounded-full text-xs font-medium">
+              <Button variant="outline" size="sm" className="h-9 px-4 rounded-full text-xs font-normal">
                 Pusat Bantuan
               </Button>
-              <Button variant="outline" size="sm" className="h-9 px-4 rounded-full text-xs font-medium">
+              <Button variant="outline" size="sm" className="h-9 px-4 rounded-full text-xs font-normal">
                 Kontak IT
               </Button>
             </div>

@@ -14,6 +14,84 @@ export type Database = {
   }
   public: {
     Tables: {
+        facilities: {
+          Row: {
+            capacity: string | null
+            created_at: string
+            description: string | null
+            features: string[] | null
+            id: string
+            image_url: string | null
+            images: string[] | null
+            is_active: boolean | null
+            name: string
+            operating_hours: string | null
+            sort_order: number | null
+            updated_at: string
+          }
+          Insert: {
+            capacity?: string | null
+            created_at?: string
+            description?: string | null
+            features?: string[] | null
+            id?: string
+            image_url?: string | null
+            images?: string[] | null
+            is_active?: boolean | null
+            name: string
+            operating_hours?: string | null
+            sort_order?: number | null
+            updated_at?: string
+          }
+          Update: {
+            capacity?: string | null
+            created_at?: string
+            description?: string | null
+            features?: string[] | null
+            id?: string
+            image_url?: string | null
+            images?: string[] | null
+            is_active?: boolean | null
+            name?: string
+            operating_hours?: string | null
+            sort_order?: number | null
+            updated_at?: string
+          }
+          Relationships: []
+        }
+        footer_logos: {
+          Row: {
+            created_at: string
+            id: string
+            image_url: string | null
+            is_active: boolean | null
+            link_url: string | null
+            name: string
+            sort_order: number | null
+            updated_at: string
+          }
+          Insert: {
+            created_at?: string
+            id?: string
+            image_url?: string | null
+            is_active?: boolean | null
+            link_url?: string | null
+            name: string
+            sort_order?: number | null
+            updated_at?: string
+          }
+          Update: {
+            created_at?: string
+            id?: string
+            image_url?: string | null
+            is_active?: boolean | null
+            link_url?: string | null
+            name?: string
+            sort_order?: number | null
+            updated_at?: string
+          }
+          Relationships: []
+        }
       facilities: {
         Row: {
           capacity: string | null

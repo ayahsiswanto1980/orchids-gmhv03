@@ -7,11 +7,11 @@ import {
   Star, 
   Settings, 
   LogOut,
-  Hotel,
-  ChevronLeft,
-  Menu,
-  UserCircle,
-  Image as ImageIcon
+Hotel,
+ChevronLeft,
+Menu,
+UserCircle,
+Image as ImageIcon
 } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
 import { Button } from '@/components/ui/button';
@@ -26,7 +26,7 @@ const menuItems = [
   { icon: Building2, label: 'Fasilitas', path: '/admin/facilities' },
   { icon: Wrench, label: 'Layanan', path: '/admin/services' },
   { icon: Star, label: 'Ulasan', path: '/admin/reviews' },
-  { icon: ImageIcon, label: 'Logo Footer', path: '/admin/footer-logos' },
+  { icon: ImageIcon, label: 'Logo Partner', path: '/admin/logos' },
   { icon: Settings, label: 'Pengaturan', path: '/admin/settings' },
 ];
 
@@ -94,12 +94,12 @@ const AdminSidebar = () => {
             <div className="w-10 h-10 bg-gold/10 rounded-xl flex items-center justify-center flex-shrink-0">
               <Hotel className="w-5 h-5 text-gold" />
             </div>
-            {!collapsed && (
-              <div className="overflow-hidden">
-                <h1 className="font-sans font-normal text-sm truncate">Grand Master</h1>
-                <p className="text-xs text-muted-foreground">Admin Panel</p>
-              </div>
-            )}
+              {!collapsed && (
+                <div className="overflow-hidden">
+                  <h1 className="font-sans font-normal text-sm truncate">Grand Master</h1>
+                  <p className="text-xs text-muted-foreground">Admin Panel</p>
+                </div>
+              )}
           </div>
         </div>
 

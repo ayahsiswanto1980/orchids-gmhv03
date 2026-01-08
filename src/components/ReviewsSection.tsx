@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { Star, Quote } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useSiteSettings } from "@/hooks/useSiteSettings";
 
 interface Review {
   id: string;
@@ -77,7 +76,7 @@ const ReviewsSection = () => {
   };
 
   const getInitials = (name: string, avatar: string | null) => {
-    if (avatar) return avatar;
+    if (avatar && avatar.startsWith('http')) return avatar;
     return name
       .split(' ')
       .map(n => n[0])
@@ -191,10 +190,14 @@ const ReviewsSection = () => {
 
               {/* Author */}
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-gold/20 rounded-full flex items-center justify-center">
-                  <span className="text-gold font-normal text-sm">
-                    {getInitials(review.guest_name, review.guest_avatar)}
-                  </span>
+                <div className="w-10 h-10 bg-gold/20 rounded-full flex items-center justify-center overflow-hidden">
+                  {review.guest_avatar && review.guest_avatar.startsWith('http') ? (
+                    <img src={review.guest_avatar} alt={review.guest_name} className="w-full h-full object-cover" />
+                  ) : (
+                    <span className="text-gold font-normal text-sm">
+                      {getInitials(review.guest_name, review.guest_avatar)}
+                    </span>
+                  )}
                 </div>
                 <div>
                   <div className="font-normal text-foreground">

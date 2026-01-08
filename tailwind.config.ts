@@ -75,6 +75,9 @@ export default {
         display: ["'Playfair Display'", "serif"],
         sans: ["'Inter'", "sans-serif"],
         marker: ["'Permanent Marker'", "cursive"],
+        display: ["'Montserrat'", "sans-serif"],
+        sans: ["'Montserrat'", "sans-serif"],
+        marker: ["'Montserrat'", "sans-serif"],
       },
       borderRadius: {
         lg: "var(--radius)",

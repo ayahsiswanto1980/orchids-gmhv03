@@ -420,6 +420,7 @@ const Facilities = () => {
                         </div>
                       </TableCell>
                         <TableCell className="font-medium">{facility.name}</TableCell>
+                        <TableCell className="font-normal">{facility.name}</TableCell>
                         <TableCell className="max-w-xs truncate">{facility.description || '-'}</TableCell>
                         <TableCell>
                           {facility.price ? (

@@ -446,6 +446,7 @@ const Rooms = () => {
                         </div>
                       </TableCell>
                       <TableCell className="font-medium">{room.name}</TableCell>
+                      <TableCell className="font-normal">{room.name}</TableCell>
                       <TableCell>{formatPrice(room.price)}</TableCell>
                       <TableCell>
                         <div className="space-y-1 text-xs">

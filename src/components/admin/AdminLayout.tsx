@@ -45,7 +45,7 @@ const AdminLayout = ({ children, title, description }: AdminLayoutProps) => {
         <div className="p-4 lg:p-8">
           {/* Header */}
           <div className="mb-8 pt-12 lg:pt-0">
-            <h1 className="font-sans text-2xl lg:text-3xl font-normal text-foreground">
+            <h1 className="font-display text-2xl lg:text-3xl font-normal text-foreground">
               {title}
             </h1>
             {description && (

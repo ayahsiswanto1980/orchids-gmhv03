@@ -4,120 +4,124 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
 import { Switch } from '@/components/ui/switch';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
-import { Plus, Pencil, Trash2, Loader2 } from 'lucide-react';
+import { Plus, Pencil, Trash2, Loader2, Image as ImageIcon, ExternalLink } from 'lucide-react';
+import ImageUpload from '@/components/admin/ImageUpload';
 
-interface Service {
+interface FooterLogo {
   id: string;
-  title: string;
-  description: string | null;
-  icon: string | null;
-  price: number | null;
+  name: string;
+  image_url: string | null;
+  link_url: string | null;
   is_active: boolean;
   sort_order: number;
 }
 
-const Services = () => {
+const Logos = () => {
   const { toast } = useToast();
-  const [services, setServices] = useState<Service[]>([]);
+  const [logos, setLogos] = useState<FooterLogo[]>([]);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [dialogOpen, setDialogOpen] = useState(false);
-  const [editingService, setEditingService] = useState<Service | null>(null);
+  const [editingLogo, setEditingLogo] = useState<FooterLogo | null>(null);
   
-    const [formData, setFormData] = useState({
-      title: '',
-      description: '',
-      icon: '',
-      price: '',
-      is_active: true,
-      sort_order: 0
-    });
+  const [formData, setFormData] = useState({
+    name: '',
+    image_url: '',
+    link_url: '',
+    is_active: true,
+    sort_order: 0
+  });
 
-    const fetchServices = async () => {
+  const fetchLogos = async () => {
     try {
       const { data, error } = await supabase
-        .from('services')
+        .from('footer_logos')
         .select('*')
         .order('sort_order');
       
       if (error) throw error;
-      setServices(data || []);
+      setLogos(data || []);
     } catch (error) {
-      console.error('Error fetching services:', error);
+      console.error('Error fetching logos:', error);
     } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchServices();
+    fetchLogos();
   }, []);
 
-    const resetForm = () => {
-      setFormData({
-        title: '',
-        description: '',
-        icon: '',
-        price: '',
-        is_active: true,
-        sort_order: 0
-      });
-      setEditingService(null);
-    };
+  const resetForm = () => {
+    setFormData({
+      name: '',
+      image_url: '',
+      link_url: '',
+      is_active: true,
+      sort_order: 0
+    });
+    setEditingLogo(null);
+  };
 
-    const openEditDialog = (service: Service) => {
-      setEditingService(service);
-      setFormData({
-        title: service.title,
-        description: service.description || '',
-        icon: service.icon || '',
-        price: service.price?.toString() || '',
-        is_active: service.is_active,
-        sort_order: service.sort_order
-      });
-      setDialogOpen(true);
-    };
+  const openEditDialog = (logo: FooterLogo) => {
+    setEditingLogo(logo);
+    setFormData({
+      name: logo.name,
+      image_url: logo.image_url || '',
+      link_url: logo.link_url || '',
+      is_active: logo.is_active,
+      sort_order: logo.sort_order
+    });
+    setDialogOpen(true);
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!formData.image_url) {
+      toast({ 
+        variant: 'destructive', 
+        title: 'Error', 
+        description: 'Silakan upload gambar logo' 
+      });
+      return;
+    }
+
     setSaving(true);
 
-    const serviceData = {
-      title: formData.title,
-      description: formData.description || null,
-      icon: formData.icon || null,
-      price: formData.price ? parseFloat(formData.price) : null,
+    const logoData = {
+      name: formData.name,
+      image_url: formData.image_url || null,
+      link_url: formData.link_url || null,
       is_active: formData.is_active,
       sort_order: formData.sort_order
     };
 
     try {
-      if (editingService) {
+      if (editingLogo) {
         const { error } = await supabase
-          .from('services')
-          .update(serviceData)
-          .eq('id', editingService.id);
+          .from('footer_logos')
+          .update(logoData)
+          .eq('id', editingLogo.id);
         
         if (error) throw error;
-        toast({ title: 'Layanan berhasil diperbarui' });
+        toast({ title: 'Logo berhasil diperbarui' });
       } else {
         const { error } = await supabase
-          .from('services')
-          .insert(serviceData);
+          .from('footer_logos')
+          .insert(logoData);
         
         if (error) throw error;
-        toast({ title: 'Layanan berhasil ditambahkan' });
+        toast({ title: 'Logo berhasil ditambahkan' });
       }
 
       setDialogOpen(false);
       resetForm();
-      fetchServices();
+      fetchLogos();
     } catch (error: any) {
       toast({ 
         variant: 'destructive', 
@@ -130,17 +134,17 @@ const Services = () => {
   };
 
   const handleDelete = async (id: string) => {
-    if (!confirm('Yakin ingin menghapus layanan ini?')) return;
+    if (!confirm('Yakin ingin menghapus logo ini?')) return;
 
     try {
       const { error } = await supabase
-        .from('services')
+        .from('footer_logos')
         .delete()
         .eq('id', id);
       
       if (error) throw error;
-      toast({ title: 'Layanan berhasil dihapus' });
-      fetchServices();
+      toast({ title: 'Logo berhasil dihapus' });
+      fetchLogos();
     } catch (error: any) {
       toast({ 
         variant: 'destructive', 
@@ -151,10 +155,10 @@ const Services = () => {
   };
 
   return (
-    <AdminLayout title="Kelola Layanan" description="Tambah dan edit layanan hotel">
+    <AdminLayout title="Kelola Logo Partner" description="Tambah dan edit logo partner di footer">
       <Card>
         <CardHeader className="flex flex-row items-center justify-between">
-          <CardTitle className="font-display">Daftar Layanan</CardTitle>
+          <CardTitle className="font-display">Daftar Logo</CardTitle>
           <Dialog open={dialogOpen} onOpenChange={(open) => {
             setDialogOpen(open);
             if (!open) resetForm();
@@ -162,70 +166,54 @@ const Services = () => {
             <DialogTrigger asChild>
               <Button className="bg-gold hover:bg-gold-dark text-accent-foreground">
                 <Plus className="w-4 h-4 mr-2" />
-                Tambah Layanan
+                Tambah Logo
               </Button>
             </DialogTrigger>
             <DialogContent className="max-w-lg">
               <DialogHeader>
                 <DialogTitle className="font-display">
-                  {editingService ? 'Edit Layanan' : 'Tambah Layanan Baru'}
+                  {editingLogo ? 'Edit Logo' : 'Tambah Logo Baru'}
                 </DialogTitle>
               </DialogHeader>
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="title">Judul Layanan *</Label>
+                  <Label>Logo Image *</Label>
+                  <ImageUpload 
+                    currentImageUrl={formData.image_url} 
+                    onImageUploaded={(url) => setFormData({ ...formData, image_url: url })} 
+                    folder="partner-logos"
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="name">Nama Partner *</Label>
                   <Input
-                    id="title"
-                    value={formData.title}
-                    onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+                    id="name"
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    placeholder="Contoh: Traveloka, Tiket.com"
                     required
                   />
                 </div>
                 
                 <div className="space-y-2">
-                  <Label htmlFor="description">Deskripsi</Label>
-                  <Textarea
-                    id="description"
-                    value={formData.description}
-                    onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                    rows={3}
+                  <Label htmlFor="link_url">Link URL (Optional)</Label>
+                  <Input
+                    id="link_url"
+                    value={formData.link_url}
+                    onChange={(e) => setFormData({ ...formData, link_url: e.target.value })}
+                    placeholder="https://example.com"
                   />
                 </div>
                 
                 <div className="space-y-2">
-                  <Label htmlFor="icon">Nama Ikon (Lucide)</Label>
+                  <Label htmlFor="sort_order">Urutan</Label>
                   <Input
-                    id="icon"
-                    value={formData.icon}
-                    onChange={(e) => setFormData({ ...formData, icon: e.target.value })}
-                    placeholder="Contoh: Wifi, Car, Coffee"
+                    id="sort_order"
+                    type="number"
+                    value={formData.sort_order}
+                    onChange={(e) => setFormData({ ...formData, sort_order: parseInt(e.target.value) || 0 })}
                   />
-                  <p className="text-xs text-muted-foreground">
-                    Gunakan nama ikon dari Lucide Icons (lucide.dev)
-                  </p>
-                </div>
-                
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="price">Biaya (Optional)</Label>
-                    <Input
-                      id="price"
-                      type="number"
-                      value={formData.price}
-                      onChange={(e) => setFormData({ ...formData, price: e.target.value })}
-                      placeholder="Contoh: 50000"
-                    />
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <Label htmlFor="sort_order">Urutan</Label>
-                    <Input
-                      id="sort_order"
-                      type="number"
-                      value={formData.sort_order}
-                      onChange={(e) => setFormData({ ...formData, sort_order: parseInt(e.target.value) || 0 })}
-                    />
-                  </div>
                 </div>
                 
                 <div className="flex items-center gap-2">
@@ -263,60 +251,63 @@ const Services = () => {
             <div className="flex items-center justify-center py-8">
               <Loader2 className="w-8 h-8 animate-spin text-gold" />
             </div>
-          ) : services.length === 0 ? (
+          ) : logos.length === 0 ? (
             <div className="text-center py-8 text-muted-foreground">
-              Belum ada data layanan. Klik "Tambah Layanan" untuk menambahkan.
+              Belum ada data logo partner. Klik "Tambah Logo" untuk menambahkan.
             </div>
           ) : (
             <div className="overflow-x-auto">
               <Table>
                 <TableHeader>
                     <TableRow>
-                      <TableHead>Judul</TableHead>
-                      <TableHead>Ikon</TableHead>
-                      <TableHead>Biaya</TableHead>
+                      <TableHead>Preview</TableHead>
+                      <TableHead>Nama</TableHead>
+                      <TableHead>Link</TableHead>
+                      <TableHead>Urutan</TableHead>
                       <TableHead>Status</TableHead>
                       <TableHead className="text-right">Aksi</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {services.map((service) => (
-                      <TableRow key={service.id}>
-                        <TableCell className="font-medium">{service.title}</TableCell>
-                        <TableCell className="font-normal">{service.title}</TableCell>
-                        <TableCell>{service.icon || '-'}</TableCell>
+                  {logos.map((logo) => (
+                      <TableRow key={logo.id}>
                         <TableCell>
-                          {service.price ? (
-                            new Intl.NumberFormat('id-ID', {
-                              style: 'currency',
-                              currency: 'IDR',
-                              maximumFractionDigits: 0
-                            }).format(service.price)
+                          {logo.image_url ? (
+                            <img src={logo.image_url} alt={logo.name} className="w-12 h-12 object-contain bg-muted rounded p-1" />
                           ) : (
-                            <span className="text-muted-foreground italic text-xs">Gratis / Incl.</span>
+                            <ImageIcon className="w-8 h-8 text-muted-foreground" />
                           )}
                         </TableCell>
+                        <TableCell className="font-medium">{logo.name}</TableCell>
+                        <TableCell>
+                          {logo.link_url ? (
+                            <a href={logo.link_url} target="_blank" rel="noopener noreferrer" className="flex items-center text-gold hover:underline text-sm">
+                              Link <ExternalLink className="w-3 h-3 ml-1" />
+                            </a>
+                          ) : '-'}
+                        </TableCell>
+                        <TableCell>{logo.sort_order}</TableCell>
                         <TableCell>
                         <span className={`px-2 py-1 rounded-full text-xs ${
-                          service.is_active 
+                          logo.is_active 
                             ? 'bg-green-500/10 text-green-600' 
                             : 'bg-red-500/10 text-red-600'
                         }`}>
-                          {service.is_active ? 'Aktif' : 'Nonaktif'}
+                          {logo.is_active ? 'Aktif' : 'Nonaktif'}
                         </span>
                       </TableCell>
                       <TableCell className="text-right">
                         <Button 
                           variant="ghost" 
                           size="icon"
-                          onClick={() => openEditDialog(service)}
+                          onClick={() => openEditDialog(logo)}
                         >
                           <Pencil className="w-4 h-4" />
                         </Button>
                         <Button 
                           variant="ghost" 
                           size="icon"
-                          onClick={() => handleDelete(service.id)}
+                          onClick={() => handleDelete(logo.id)}
                           className="text-destructive hover:text-destructive"
                         >
                           <Trash2 className="w-4 h-4" />
@@ -334,4 +325,4 @@ const Services = () => {
   );
 };
 
-export default Services;
+export default Logos;

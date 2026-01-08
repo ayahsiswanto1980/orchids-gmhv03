@@ -143,7 +143,7 @@ const RoomDetailModal = ({ room, isOpen, onClose, getImageUrl }: RoomDetailModal
               ))}
               <span className="text-sm text-muted-foreground ml-1">4.5</span>
             </div>
-            <DialogTitle className="font-sans text-2xl md:text-3xl text-foreground">
+            <DialogTitle className="font-display text-2xl md:text-3xl text-foreground">
               {room.name}
             </DialogTitle>
           </DialogHeader>
