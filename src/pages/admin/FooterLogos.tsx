@@ -1,16 +1,14 @@
-import { useEffect, useState } from 'react';
-import AdminLayout from '@/components/admin/AdminLayout';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Switch } from '@/components/ui/switch';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { supabase } from '@/integrations/supabase/client';
-import { useToast } from '@/hooks/use-toast';
-import { Plus, Pencil, Trash2, Loader2, Link as LinkIcon } from 'lucide-react';
-import ImageUpload from '@/components/admin/ImageUpload';
+import { useState, useEffect } from "react";
+import { supabase } from "@/integrations/supabase/client";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Switch } from "@/components/ui/switch";
+import { toast } from "sonner";
+import { Plus, Trash2, Edit2, Save, X, GripVertical, Image as ImageIcon } from "lucide-react";
+import ImageUpload from "@/components/admin/ImageUpload";
 
 interface FooterLogo {
   id: string;
@@ -22,309 +20,265 @@ interface FooterLogo {
 }
 
 const FooterLogos = () => {
-  const { toast } = useToast();
   const [logos, setLogos] = useState<FooterLogo[]>([]);
   const [loading, setLoading] = useState(true);
-  const [saving, setSaving] = useState(false);
-  const [dialogOpen, setDialogOpen] = useState(false);
-  const [editingLogo, setEditingLogo] = useState<FooterLogo | null>(null);
-  
-  const [formData, setFormData] = useState({
-    name: '',
-    image_url: '',
-    link_url: '',
+  const [isEditing, setIsEditing] = useState(false);
+  const [formData, setFormData] = useState<Partial<FooterLogo>>({
+    name: "",
+    image_url: "",
+    link_url: "",
     is_active: true,
-    sort_order: 0
+    sort_order: 0,
   });
-
-  const fetchLogos = async () => {
-    try {
-      const { data, error } = await supabase
-        .from('footer_logos')
-        .select('*')
-        .order('sort_order');
-      
-      if (error) throw error;
-      setLogos(data || []);
-    } catch (error) {
-      console.error('Error fetching logos:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   useEffect(() => {
     fetchLogos();
   }, []);
 
-  const resetForm = () => {
-    setFormData({
-      name: '',
-      image_url: '',
-      link_url: '',
-      is_active: true,
-      sort_order: 0
-    });
-    setEditingLogo(null);
-  };
+  const fetchLogos = async () => {
+    try {
+      const { data, error } = await supabase
+        .from("footer_logos")
+        .select("*")
+        .order("sort_order", { ascending: true });
 
-  const openEditDialog = (logo: FooterLogo) => {
-    setEditingLogo(logo);
-    setFormData({
-      name: logo.name,
-      image_url: logo.image_url,
-      link_url: logo.link_url || '',
-      is_active: logo.is_active,
-      sort_order: logo.sort_order
-    });
-    setDialogOpen(true);
+      if (error) throw error;
+      setLogos(data || []);
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "Terjadi kesalahan";
+      toast.error("Gagal mengambil data logo: " + message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.image_url) {
-      toast({ variant: 'destructive', title: 'Error', description: 'Gambar logo harus diunggah' });
+      toast.error("Logo harus diunggah");
       return;
     }
 
-    setSaving(true);
-
-    const logoData = {
-      name: formData.name,
-      image_url: formData.image_url,
-      link_url: formData.link_url || null,
-      is_active: formData.is_active,
-      sort_order: formData.sort_order
-    };
-
     try {
-      if (editingLogo) {
+      if (formData.id) {
         const { error } = await supabase
-          .from('footer_logos')
-          .update(logoData)
-          .eq('id', editingLogo.id);
-        
+          .from("footer_logos")
+          .update({
+            name: formData.name,
+            image_url: formData.image_url,
+            link_url: formData.link_url,
+            is_active: formData.is_active,
+            sort_order: formData.sort_order,
+            updated_at: new Date().toISOString(),
+          })
+          .eq("id", formData.id);
+
         if (error) throw error;
-        toast({ title: 'Logo berhasil diperbarui' });
+        toast.success("Logo berhasil diperbarui");
       } else {
-        const { error } = await supabase
-          .from('footer_logos')
-          .insert(logoData);
-        
+        const { error } = await supabase.from("footer_logos").insert([
+          {
+            name: formData.name,
+            image_url: formData.image_url,
+            link_url: formData.link_url,
+            is_active: formData.is_active,
+            sort_order: logos.length,
+          },
+        ]);
+
         if (error) throw error;
-        toast({ title: 'Logo berhasil ditambahkan' });
+        toast.success("Logo berhasil ditambahkan");
       }
 
-      setDialogOpen(false);
-      resetForm();
-      fetchLogos();
-    } catch (error: any) {
-      toast({ 
-        variant: 'destructive', 
-        title: 'Error', 
-        description: error.message 
+      setIsEditing(false);
+      setFormData({
+        name: "",
+        image_url: "",
+        link_url: "",
+        is_active: true,
+        sort_order: 0,
       });
-    } finally {
-      setSaving(false);
+      fetchLogos();
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "Terjadi kesalahan";
+      toast.error("Gagal menyimpan logo: " + message);
     }
   };
 
+  const handleEdit = (logo: FooterLogo) => {
+    setFormData(logo);
+    setIsEditing(true);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   const handleDelete = async (id: string) => {
-    if (!confirm('Yakin ingin menghapus logo ini?')) return;
+    if (!confirm("Apakah Anda yakin ingin menghapus logo ini?")) return;
 
     try {
-      const { error } = await supabase
-        .from('footer_logos')
-        .delete()
-        .eq('id', id);
-      
+      const { error } = await supabase.from("footer_logos").delete().eq("id", id);
       if (error) throw error;
-      toast({ title: 'Logo berhasil dihapus' });
+      toast.success("Logo berhasil dihapus");
       fetchLogos();
-    } catch (error: any) {
-      toast({ 
-        variant: 'destructive', 
-        title: 'Error', 
-        description: error.message 
-      });
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "Terjadi kesalahan";
+      toast.error("Gagal menghapus logo: " + message);
+    }
+  };
+
+  const toggleActive = async (logo: FooterLogo) => {
+    try {
+      const { error } = await supabase
+        .from("footer_logos")
+        .update({ is_active: !logo.is_active })
+        .eq("id", logo.id);
+
+      if (error) throw error;
+      fetchLogos();
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "Terjadi kesalahan";
+      toast.error("Gagal memperbarui status: " + message);
     }
   };
 
   return (
-    <AdminLayout title="Kelola Logo Footer" description="Manajemen logo partner atau brand di bagian bawah website">
-      <Card>
-        <CardHeader className="flex flex-row items-center justify-between">
-          <CardTitle className="font-display text-gold">Daftar Logo</CardTitle>
-          <Dialog open={dialogOpen} onOpenChange={(open) => {
-            setDialogOpen(open);
-            if (!open) resetForm();
-          }}>
-            <DialogTrigger asChild>
-              <Button className="bg-gold hover:bg-gold-dark text-accent-foreground">
-                <Plus className="w-4 h-4 mr-2" />
-                Tambah Logo
-              </Button>
-            </DialogTrigger>
-            <DialogContent className="max-w-md">
-              <DialogHeader>
-                <DialogTitle className="font-display">
-                  {editingLogo ? 'Edit Logo' : 'Tambah Logo Baru'}
-                </DialogTitle>
-              </DialogHeader>
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="space-y-2">
-                  <Label>File Gambar Logo</Label>
-                  <ImageUpload
-                    currentImageUrl={formData.image_url}
-                    onImageUploaded={(url) => setFormData({ ...formData, image_url: url })}
-                    folder="footer-logos"
-                  />
-                </div>
-                
-                <div className="space-y-2">
-                  <Label htmlFor="name">Nama Partner / Brand</Label>
-                  <Input
-                    id="name"
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    placeholder="Contoh: CHSE Certified"
-                    required
-                  />
-                </div>
-                
-                <div className="space-y-2">
-                  <Label htmlFor="link_url">Link URL (Opsional)</Label>
-                  <Input
-                    id="link_url"
-                    value={formData.link_url}
-                    onChange={(e) => setFormData({ ...formData, link_url: e.target.value })}
-                    placeholder="https://..."
-                  />
-                </div>
+    <div className="space-y-6">
+      <div className="flex justify-between items-center">
+        <div>
+          <h1 className="text-3xl font-sans text-foreground">Logo Footer</h1>
+          <p className="text-muted-foreground">Kelola logo partner atau brand yang tampil di bagian bawah website.</p>
+        </div>
+        {!isEditing && (
+          <Button onClick={() => setIsEditing(true)} className="bg-gold hover:bg-gold-dark text-white">
+            <Plus className="w-4 h-4 mr-2" />
+            Tambah Logo
+          </Button>
+        )}
+      </div>
 
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="sort_order">Urutan</Label>
+      {isEditing && (
+        <Card className="border-gold/20 shadow-lg">
+          <CardHeader>
+            <CardTitle>{formData.id ? "Edit Logo" : "Tambah Logo Baru"}</CardTitle>
+            <CardDescription>Isi detail logo di bawah ini.</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="space-y-4">
+                  <div>
+                    <Label htmlFor="name">Nama Brand/Partner</Label>
                     <Input
-                      id="sort_order"
-                      type="number"
-                      value={formData.sort_order}
-                      onChange={(e) => setFormData({ ...formData, sort_order: parseInt(e.target.value) || 0 })}
+                      id="name"
+                      value={formData.name}
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      placeholder="Contoh: Traveloka, Booking.com"
+                      required
                     />
                   </div>
-                  
-                  <div className="flex items-center gap-2 pt-8">
+                  <div>
+                    <Label htmlFor="link_url">Link URL (Opsional)</Label>
+                    <Input
+                      id="link_url"
+                      value={formData.link_url || ""}
+                      onChange={(e) => setFormData({ ...formData, link_url: e.target.value })}
+                      placeholder="https://..."
+                    />
+                  </div>
+                  <div className="flex items-center space-x-2">
                     <Switch
                       id="is_active"
                       checked={formData.is_active}
                       onCheckedChange={(checked) => setFormData({ ...formData, is_active: checked })}
                     />
-                    <Label htmlFor="is_active">Aktif</Label>
+                    <Label htmlFor="is_active">Aktifkan Logo</Label>
                   </div>
                 </div>
-                
-                <div className="flex gap-2 pt-4">
-                  <Button 
-                    type="button" 
-                    variant="outline" 
-                    onClick={() => setDialogOpen(false)}
-                    className="flex-1"
-                  >
-                    Batal
-                  </Button>
-                  <Button 
-                    type="submit" 
-                    className="flex-1 bg-gold hover:bg-gold-dark text-accent-foreground"
-                    disabled={saving}
-                  >
-                    {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Simpan'}
-                  </Button>
+                <div>
+                  <Label>Logo</Label>
+                  <ImageUpload
+                    currentImageUrl={formData.image_url}
+                    onImageUploaded={(url) => setFormData({ ...formData, image_url: url })}
+                  />
                 </div>
-              </form>
-            </DialogContent>
-          </Dialog>
-        </CardHeader>
-        <CardContent>
-          {loading ? (
-            <div className="flex items-center justify-center py-8">
-              <Loader2 className="w-8 h-8 animate-spin text-gold" />
-            </div>
-          ) : logos.length === 0 ? (
-            <div className="text-center py-8 text-muted-foreground">
-              Belum ada data logo. Klik "Tambah Logo" untuk menambahkan.
-            </div>
-          ) : (
-            <div className="overflow-x-auto">
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>Preview</TableHead>
-                    <TableHead>Nama</TableHead>
-                    <TableHead>Link</TableHead>
-                    <TableHead>Urutan</TableHead>
-                    <TableHead>Status</TableHead>
-                    <TableHead className="text-right">Aksi</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {logos.map((logo) => (
-                    <TableRow key={logo.id}>
-                      <TableCell>
-                        <div className="bg-muted p-2 rounded w-20 h-12 flex items-center justify-center overflow-hidden">
-                          <img 
-                            src={logo.image_url} 
-                            alt={logo.name}
-                            className="max-w-full max-h-full object-contain"
-                          />
-                        </div>
-                      </TableCell>
-                      <TableCell className="font-medium">{logo.name}</TableCell>
-                      <TableCell>
-                        {logo.link_url ? (
-                          <a href={logo.link_url} target="_blank" rel="noopener noreferrer" className="text-gold hover:underline flex items-center gap-1">
-                            <LinkIcon className="w-3 h-3" />
-                            Visit
-                          </a>
+              </div>
+              <div className="flex justify-end gap-3 pt-4 border-t">
+                <Button type="button" variant="outline" onClick={() => {
+                  setIsEditing(false);
+                  setFormData({ name: "", image_url: "", link_url: "", is_active: true, sort_order: 0 });
+                }}>
+                  Batal
+                </Button>
+                <Button type="submit" className="bg-gold hover:bg-gold-dark text-white">
+                  <Save className="w-4 h-4 mr-2" />
+                  Simpan Logo
+                </Button>
+              </div>
+            </form>
+          </CardContent>
+        </Card>
+      )}
+
+      <Card>
+        <CardContent className="p-0">
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead className="w-[80px]">Logo</TableHead>
+                <TableHead>Nama</TableHead>
+                <TableHead>Link</TableHead>
+                <TableHead className="w-[100px]">Status</TableHead>
+                <TableHead className="text-right">Aksi</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {loading ? (
+                <TableRow>
+                  <TableCell colSpan={5} className="text-center py-10">Memuat data...</TableCell>
+                </TableRow>
+              ) : logos.length === 0 ? (
+                <TableRow>
+                  <TableCell colSpan={5} className="text-center py-10 text-muted-foreground">Belum ada logo yang ditambahkan.</TableCell>
+                </TableRow>
+              ) : (
+                logos.map((logo) => (
+                  <TableRow key={logo.id}>
+                    <TableCell>
+                      <div className="w-12 h-12 bg-muted rounded-md overflow-hidden flex items-center justify-center border">
+                        {logo.image_url ? (
+                          <img src={logo.image_url} alt={logo.name} className="w-full h-full object-contain p-1" />
                         ) : (
-                          <span className="text-muted-foreground">-</span>
+                          <ImageIcon className="w-6 h-6 text-muted-foreground" />
                         )}
-                      </TableCell>
-                      <TableCell>{logo.sort_order}</TableCell>
-                      <TableCell>
-                        <span className={`px-2 py-1 rounded-full text-xs ${
-                          logo.is_active 
-                            ? 'bg-green-500/10 text-green-600' 
-                            : 'bg-red-500/10 text-red-600'
-                        }`}>
-                          {logo.is_active ? 'Aktif' : 'Nonaktif'}
-                        </span>
-                      </TableCell>
-                      <TableCell className="text-right">
-                        <Button 
-                          variant="ghost" 
-                          size="icon"
-                          onClick={() => openEditDialog(logo)}
-                        >
-                          <Pencil className="w-4 h-4" />
+                      </div>
+                    </TableCell>
+                    <TableCell className="font-medium">{logo.name}</TableCell>
+                    <TableCell className="text-sm text-muted-foreground truncate max-w-[200px]">
+                      {logo.link_url || "-"}
+                    </TableCell>
+                    <TableCell>
+                      <Switch
+                        checked={logo.is_active}
+                        onCheckedChange={() => toggleActive(logo)}
+                      />
+                    </TableCell>
+                    <TableCell className="text-right">
+                      <div className="flex justify-end gap-2">
+                        <Button variant="ghost" size="icon" onClick={() => handleEdit(logo)}>
+                          <Edit2 className="w-4 h-4 text-blue-500" />
                         </Button>
-                        <Button 
-                          variant="ghost" 
-                          size="icon"
-                          onClick={() => handleDelete(logo.id)}
-                          className="text-destructive hover:text-destructive"
-                        >
-                          <Trash2 className="w-4 h-4" />
+                        <Button variant="ghost" size="icon" onClick={() => handleDelete(logo.id)}>
+                          <Trash2 className="w-4 h-4 text-destructive" />
                         </Button>
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </div>
-          )}
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                ))
+              )}
+            </TableBody>
+          </Table>
         </CardContent>
       </Card>
-    </AdminLayout>
+    </div>
   );
 };
 

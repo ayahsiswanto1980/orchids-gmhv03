@@ -34,11 +34,11 @@ const App = () => (
             <Route path="/admin/rooms" element={<Rooms />} />
             <Route path="/admin/facilities" element={<Facilities />} />
             <Route path="/admin/services" element={<Services />} />
-            <Route path="/admin/reviews" element={<Reviews />} />
-              <Route path="/admin/settings" element={<Settings />} />
-              <Route path="/admin/profile" element={<Profile />} />
+              <Route path="/admin/reviews" element={<Reviews />} />
               <Route path="/admin/footer-logos" element={<FooterLogos />} />
-              <Route path="*" element={<NotFound />} />
+              <Route path="/admin/settings" element={<Settings />} />
+            <Route path="/admin/profile" element={<Profile />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </AuthProvider>
       </BrowserRouter>

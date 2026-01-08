@@ -25,10 +25,10 @@ const menuItems = [
   { icon: Bed, label: 'Kamar', path: '/admin/rooms' },
   { icon: Building2, label: 'Fasilitas', path: '/admin/facilities' },
   { icon: Wrench, label: 'Layanan', path: '/admin/services' },
-    { icon: Star, label: 'Ulasan', path: '/admin/reviews' },
-    { icon: ImageIcon, label: 'Logo Footer', path: '/admin/footer-logos' },
-    { icon: Settings, label: 'Pengaturan', path: '/admin/settings' },
-  ];
+  { icon: Star, label: 'Ulasan', path: '/admin/reviews' },
+  { icon: ImageIcon, label: 'Logo Footer', path: '/admin/footer-logos' },
+  { icon: Settings, label: 'Pengaturan', path: '/admin/settings' },
+];
 
 const AdminSidebar = () => {
   const location = useLocation();
