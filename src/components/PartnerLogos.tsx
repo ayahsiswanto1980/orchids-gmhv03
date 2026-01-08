@@ -1,88 +1,48 @@
-import { useEffect, useState } from 'react';
-import { supabase } from '@/integrations/supabase/client';
-import { motion } from 'framer-motion';
+import React from 'react';
 
-interface FooterLogo {
-  id: string;
-  name: string;
-  image_url: string | null;
-  link_url: string | null;
-  is_active: boolean;
-  sort_order: number;
-}
+const partners = [
+  { name: 'Partner 1', logo: 'https://via.placeholder.com/150x50?text=Logo+1' },
+  { name: 'Partner 2', logo: 'https://via.placeholder.com/150x50?text=Logo+2' },
+  { name: 'Partner 3', logo: 'https://via.placeholder.com/150x50?text=Logo+3' },
+  { name: 'Partner 4', logo: 'https://via.placeholder.com/150x50?text=Logo+4' },
+  { name: 'Partner 5', logo: 'https://via.placeholder.com/150x50?text=Logo+5' },
+];
 
-const PartnerLogos = () => {
-  const [logos, setLogos] = useState<FooterLogo[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchLogos = async () => {
-      try {
-        const { data, error } = await supabase
-          .from('footer_logos')
-          .select('*')
-          .eq('is_active', true)
-          .order('sort_order');
-        
-        if (error) throw error;
-        setLogos(data || []);
-      } catch (error) {
-        console.error('Error fetching partner logos:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchLogos();
-  }, []);
-
-  if (loading || logos.length === 0) return null;
-
+export const PartnerLogos = () => {
   return (
-    <section className="py-12 bg-white border-t border-accent/20">
-      <div className="container px-4">
-        <div className="text-center mb-8">
-          <h3 className="text-sm font-display uppercase tracking-[0.2em] text-accent/60 mb-2">Our Partners & Payment Methods</h3>
-          <div className="w-12 h-[1px] bg-gold mx-auto"></div>
-        </div>
+    <div className="py-12 bg-white overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4">
+        <h2 className="text-center text-gray-500 text-sm font-semibold uppercase tracking-widest mb-8">
+          Our Trusted Partners
+        </h2>
         
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 items-center justify-items-center">
-          {logos.map((logo, index) => (
-            <motion.div
-              key={logo.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
-              viewport={{ once: true }}
-              className="w-full flex justify-center"
-            >
-              {logo.link_url ? (
-                <a 
-                  href={logo.link_url} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 flex items-center justify-center p-4 h-24 w-full"
-                >
-                  <img 
-                    src={logo.image_url || ''} 
-                    alt={logo.name} 
-                    className="max-h-full max-w-full object-contain"
-                  />
-                </a>
-              ) : (
-                <div className="grayscale opacity-60 flex items-center justify-center p-4 h-24 w-full">
-                  <img 
-                    src={logo.image_url || ''} 
-                    alt={logo.name} 
-                    className="max-h-full max-w-full object-contain"
-                  />
-                </div>
-              )}
-            </motion.div>
-          ))}
+        {/* Container untuk Animasi Marquee (Berjalan) */}
+        <div className="relative flex overflow-x-hidden">
+          <div className="flex animate-marquee whitespace-nowrap items-center">
+            {partners.concat(partners).map((partner, index) => (
+              <img
+                key={index}
+                src={partner.logo}
+                alt={partner.name}
+                className="mx-8 h-12 grayscale hover:grayscale-0 transition-all duration-300"
+              />
+            ))}
+          </div>
         </div>
       </div>
-    </section>
+
+      {/* Tambahkan Style Khusus di bawah ini jika Tailwind config belum ada animasinya */}
+      <style>{`
+        @keyframes marquee {
+          0% { transform: translateX(0%); }
+          100% { transform: translateX(-50%); }
+        }
+        .animate-marquee {
+          display: flex;
+          animation: marquee 25s linear infinite;
+        }
+      `}</style>
+    </div>
   );
 };
 
