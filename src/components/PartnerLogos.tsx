@@ -49,14 +49,14 @@ const PartnerLogos = () => {
           {logos.map((logo) => (
             <div
               key={logo.id}
-              className="w-full flex justify-center transform hover:scale-105 transition-transform duration-300"
+              className="w-full flex justify-center"
             >
               {logo.link_url ? (
                 <a 
                   href={logo.link_url} 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center p-4 h-24 w-full"
+                  className="transition-all duration-300 flex items-center justify-center p-4 h-24 w-full"
                 >
                   <img 
                     src={logo.image_url || ''} 
