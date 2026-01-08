@@ -303,7 +303,7 @@ const Reviews = () => {
                 <TableBody>
                   {reviews.map((review) => (
                     <TableRow key={review.id}>
-                      <TableCell className="font-normal">{review.guest_name}</TableCell>
+                      <TableCell className="font-medium">{review.guest_name}</TableCell>
                       <TableCell>{renderStars(review.rating)}</TableCell>
                       <TableCell className="max-w-xs truncate">{review.comment || '-'}</TableCell>
                       <TableCell>

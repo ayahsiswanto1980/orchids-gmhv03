@@ -136,7 +136,7 @@ const ReviewsSection = () => {
           {/* Overall Rating */}
           {reviews.length > 0 && (
             <div className="inline-flex items-center gap-4 bg-card rounded-full px-6 py-3 shadow-soft">
-              <div className="text-3xl font-display font-normal text-foreground">
+              <div className="text-3xl font-sans font-normal text-foreground">
                 {averageRating}
               </div>
               <div className="flex flex-col items-start">

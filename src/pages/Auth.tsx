@@ -148,7 +148,7 @@ const Auth = () => {
         <div className="relative z-10">
           <Link to="/" className="inline-flex items-center gap-2 text-gold hover:text-gold/80 transition-colors mb-12 group">
             <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-            <span className="text-sm font-normal">Kembali ke Beranda</span>
+            <span className="text-sm font-medium">Kembali ke Beranda</span>
           </Link>
           
           <div className="flex items-center gap-3 mb-6">
@@ -174,7 +174,7 @@ const Auth = () => {
               <CheckCircle2 className="w-4 h-4 text-gold" />
             </div>
             <div>
-              <p className="text-cream font-normal">Manajemen Real-time</p>
+              <p className="text-cream font-medium">Manajemen Real-time</p>
               <p className="text-cream/50 text-sm">Update ketersediaan kamar dan layanan secara instan.</p>
             </div>
           </div>
@@ -183,7 +183,7 @@ const Auth = () => {
               <CheckCircle2 className="w-4 h-4 text-gold" />
             </div>
             <div>
-              <p className="text-cream font-normal">Analitik Mendalam</p>
+              <p className="text-cream font-medium">Analitik Mendalam</p>
               <p className="text-cream/50 text-sm">Pahami preferensi tamu melalui ulasan dan data.</p>
             </div>
           </div>
@@ -201,7 +201,7 @@ const Auth = () => {
         <div className="lg:hidden flex items-center justify-between mb-12">
           <div className="flex items-center gap-2">
             <Hotel className="w-6 h-6 text-gold" />
-            <span className="font-display font-normal text-lg">Grand Master</span>
+            <span className="font-display font-bold text-lg">Grand Master</span>
           </div>
           <Link to="/" className="p-2 hover:bg-muted rounded-full transition-colors">
             <ArrowLeft className="w-5 h-5" />
@@ -253,7 +253,7 @@ const Auth = () => {
                 <div className="space-y-2 group">
                   <div className="flex items-center justify-between">
                     <Label htmlFor="login-password" className="group-focus-within:text-gold transition-colors">Kata Sandi</Label>
-                    <button type="button" className="text-xs text-gold hover:underline font-normal">Lupa sandi?</button>
+                    <button type="button" className="text-xs text-gold hover:underline font-medium">Lupa sandi?</button>
                   </div>
                   <div className="relative">
                     <Input
@@ -282,7 +282,7 @@ const Auth = () => {
                 
                 <Button 
                   type="submit" 
-                  className="w-full h-12 bg-gold hover:bg-gold-dark text-navy font-normal text-base transition-all duration-300 shadow-lg shadow-gold/10 active:scale-[0.98]"
+                  className="w-full h-12 bg-gold hover:bg-gold-dark text-navy font-bold text-base transition-all duration-300 shadow-lg shadow-gold/10 active:scale-[0.98]"
                   disabled={isLoading}
                 >
                   {isLoading ? (
@@ -382,7 +382,7 @@ const Auth = () => {
                 
                 <Button 
                   type="submit" 
-                  className="w-full h-12 bg-gold hover:bg-gold-dark text-navy font-normal text-base transition-all duration-300 shadow-lg shadow-gold/10 active:scale-[0.98]"
+                  className="w-full h-12 bg-gold hover:bg-gold-dark text-navy font-bold text-base transition-all duration-300 shadow-lg shadow-gold/10 active:scale-[0.98]"
                   disabled={isLoading}
                 >
                   {isLoading ? (
@@ -405,10 +405,10 @@ const Auth = () => {
               <span className="w-8 h-px bg-muted" />
             </p>
             <div className="flex items-center justify-center gap-4">
-              <Button variant="outline" size="sm" className="h-9 px-4 rounded-full text-xs font-normal">
+              <Button variant="outline" size="sm" className="h-9 px-4 rounded-full text-xs font-medium">
                 Pusat Bantuan
               </Button>
-              <Button variant="outline" size="sm" className="h-9 px-4 rounded-full text-xs font-normal">
+              <Button variant="outline" size="sm" className="h-9 px-4 rounded-full text-xs font-medium">
                 Kontak IT
               </Button>
             </div>

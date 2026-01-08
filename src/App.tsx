@@ -14,6 +14,7 @@ import Services from "./pages/admin/Services";
 import Reviews from "./pages/admin/Reviews";
 import Settings from "./pages/admin/Settings";
 import Profile from "./pages/admin/Profile";
+import FooterLogos from "./pages/admin/FooterLogos";
 import HoverReceiver from "@/visual-edits/VisualEditsMessenger";
 
 const queryClient = new QueryClient();
@@ -34,9 +35,10 @@ const App = () => (
             <Route path="/admin/facilities" element={<Facilities />} />
             <Route path="/admin/services" element={<Services />} />
             <Route path="/admin/reviews" element={<Reviews />} />
-            <Route path="/admin/settings" element={<Settings />} />
-            <Route path="/admin/profile" element={<Profile />} />
-            <Route path="*" element={<NotFound />} />
+              <Route path="/admin/settings" element={<Settings />} />
+              <Route path="/admin/profile" element={<Profile />} />
+              <Route path="/admin/footer-logos" element={<FooterLogos />} />
+              <Route path="*" element={<NotFound />} />
           </Routes>
         </AuthProvider>
       </BrowserRouter>

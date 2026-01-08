@@ -2050,7 +2050,7 @@ export default function HoverReceiver() {
         <>
           {focusTag && (
             <div
-              className="fixed text-[10px] font-normal text-white bg-[#3b82f6] px-1 rounded-sm pointer-events-none select-none"
+              className="fixed text-[10px] font-semibold text-white bg-[#3b82f6] px-1 rounded-sm pointer-events-none select-none"
               style={{
                 zIndex: 100003,
                 left: focusBox.left - 4,

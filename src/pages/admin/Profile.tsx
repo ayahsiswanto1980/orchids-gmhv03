@@ -312,7 +312,7 @@ const Profile = () => {
                 />
               </div>
               <div className="space-y-1">
-                <p className="text-sm font-normal">Foto Profil</p>
+                <p className="text-sm font-medium">Foto Profil</p>
                 <p className="text-xs text-muted-foreground">
                   JPG, PNG. Maksimal 2MB
                 </p>

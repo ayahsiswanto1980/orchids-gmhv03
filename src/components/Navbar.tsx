@@ -25,14 +25,10 @@ const Navbar = () => {
     { label: "Lokasi", href: "#lokasi" },
   ];
 
-  // Parse hotel name
-  const hotelNameParts = settings.hotel_name.split(" ");
-  const mainName =
-    hotelNameParts.slice(0, -1).join(" ") || settings.hotel_name;
-  const subName =
-    hotelNameParts.length > 1
-      ? hotelNameParts[hotelNameParts.length - 1]
-      : "";
+  // Parse hotel name into parts
+  const hotelNameParts = settings.hotel_name.split(' ');
+  const mainName = hotelNameParts.slice(0, -1).join(' ') || settings.hotel_name;
+  const subName = hotelNameParts.length > 1 ? hotelNameParts[hotelNameParts.length - 1] : '';
 
   return (
     <nav
@@ -47,26 +43,24 @@ const Navbar = () => {
           {/* Logo */}
           <a href="#beranda" className="flex items-center gap-3">
             {settings.logo_url ? (
-              <img
-                src={settings.logo_url}
+              <img 
+                src={settings.logo_url} 
                 alt={settings.hotel_name}
                 className="h-10 lg:h-12 w-auto object-contain"
               />
             ) : (
               <div className="flex flex-col">
-                <span
-                  className={`font-marker text-xl lg:text-2xl transition-colors ${
-                    isScrolled ? "text-primary" : "text-gold"
-                  }`}
-                >
-                  {mainName}
-                </span>
+                  <span
+                    className={`font-sans text-xl lg:text-2xl transition-colors ${
+                      isScrolled ? "text-primary" : "text-gold"
+                    }`}
+                  >
+                    {mainName}
+                  </span>
                 {subName && (
                   <span
                     className={`text-xs tracking-[0.2em] uppercase ${
-                      isScrolled
-                        ? "text-muted-foreground"
-                        : "text-gold/80"
+                      isScrolled ? "text-muted-foreground" : "text-gold/80"
                     }`}
                   >
                     {subName}
@@ -76,25 +70,26 @@ const Navbar = () => {
             )}
           </a>
 
-          {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className={`text-sm transition-colors hover:text-gold ${
-                  isScrolled ? "text-foreground" : "text-cream"
-                }`}
-              >
-                {link.label}
-              </a>
-            ))}
-          </div>
+            {/* Desktop Navigation */}
+            <div className="hidden lg:flex items-center gap-8">
+              {navLinks.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className={`text-sm font-normal transition-colors hover:text-gold ${
+                    isScrolled ? "text-foreground" : "text-cream"
+                  }`}
+                >
+                  {link.label}
+                </a>
+              ))}
+            </div>
 
-          {/* CTA */}
+
+          {/* CTA Button */}
           <div className="hidden lg:flex items-center gap-4">
             <a
-              href={`tel:${settings.phone.replace(/[^0-9+]/g, "")}`}
+              href={`tel:${settings.phone.replace(/[^0-9+]/g, '')}`}
               className={`flex items-center gap-2 text-sm ${
                 isScrolled ? "text-foreground" : "text-cream"
               }`}
@@ -107,7 +102,7 @@ const Navbar = () => {
             </Button>
           </div>
 
-          {/* Mobile Toggle */}
+          {/* Mobile Menu Button */}
           <button
             className="lg:hidden p-2"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -124,19 +119,20 @@ const Navbar = () => {
         {isMobileMenuOpen && (
           <div className="lg:hidden absolute top-full left-0 right-0 bg-card shadow-medium animate-fade-in">
             <div className="container mx-auto px-4 py-6 flex flex-col gap-4">
-              {navLinks.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  className="text-foreground hover:text-gold transition-colors py-2"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  {link.label}
-                </a>
-              ))}
-              <Button variant="gold" size="lg" className="mt-4">
-                Pesan Sekarang
-              </Button>
+                {navLinks.map((link) => (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    className="text-foreground hover:text-gold transition-colors py-2"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    {link.label}
+                  </a>
+                ))}
+                <Button variant="gold" size="lg" className="mt-4">
+                  Pesan Sekarang
+                </Button>
+
             </div>
           </div>
         )}

@@ -112,7 +112,7 @@ const FacilityDetailModal = ({ facility, isOpen, onClose, getImageUrl }: Facilit
         {/* Content */}
         <div className="p-6 space-y-6">
           <DialogHeader>
-            <DialogTitle className="font-display text-2xl md:text-3xl text-foreground">
+            <DialogTitle className="font-sans text-2xl md:text-3xl text-foreground">
               {facility.name}
             </DialogTitle>
           </DialogHeader>

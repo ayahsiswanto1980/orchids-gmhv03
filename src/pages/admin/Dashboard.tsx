@@ -69,7 +69,7 @@ const Dashboard = () => {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm text-muted-foreground">{stat.title}</p>
-                  <p className="text-3xl font-normal mt-1">
+                  <p className="text-3xl font-bold mt-1">
                     {loading ? '-' : stat.value}
                   </p>
                 </div>
@@ -91,17 +91,17 @@ const Dashboard = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             <a href="/admin/rooms" className="p-4 rounded-lg border border-border hover:border-gold/30 hover:bg-gold/5 transition-all group">
               <Bed className="w-8 h-8 text-gold mb-2 group-hover:scale-110 transition-transform" />
-              <h3 className="font-normal">Kelola Kamar</h3>
+              <h3 className="font-semibold">Kelola Kamar</h3>
               <p className="text-sm text-muted-foreground">Tambah atau edit data kamar</p>
             </a>
             <a href="/admin/facilities" className="p-4 rounded-lg border border-border hover:border-gold/30 hover:bg-gold/5 transition-all group">
               <Building2 className="w-8 h-8 text-gold mb-2 group-hover:scale-110 transition-transform" />
-              <h3 className="font-normal">Kelola Fasilitas</h3>
+              <h3 className="font-semibold">Kelola Fasilitas</h3>
               <p className="text-sm text-muted-foreground">Atur fasilitas hotel</p>
             </a>
             <a href="/admin/reviews" className="p-4 rounded-lg border border-border hover:border-gold/30 hover:bg-gold/5 transition-all group">
               <Star className="w-8 h-8 text-gold mb-2 group-hover:scale-110 transition-transform" />
-              <h3 className="font-normal">Kelola Ulasan</h3>
+              <h3 className="font-semibold">Kelola Ulasan</h3>
               <p className="text-sm text-muted-foreground">Moderasi ulasan tamu</p>
             </a>
           </div>

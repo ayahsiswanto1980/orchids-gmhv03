@@ -72,9 +72,9 @@ export default {
         },
       },
       fontFamily: {
-        display: ["'Montserrat'", "sans-serif"],
-        sans: ["'Montserrat'", "sans-serif"],
-        marker: ["'Montserrat'", "sans-serif"],
+        display: ["'Playfair Display'", "serif"],
+        sans: ["'Inter'", "sans-serif"],
+        marker: ["'Permanent Marker'", "cursive"],
       },
       borderRadius: {
         lg: "var(--radius)",

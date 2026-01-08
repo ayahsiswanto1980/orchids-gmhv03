@@ -10,7 +10,8 @@ import {
   Hotel,
   ChevronLeft,
   Menu,
-  UserCircle
+  UserCircle,
+  Image as ImageIcon
 } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
 import { Button } from '@/components/ui/button';
@@ -24,9 +25,10 @@ const menuItems = [
   { icon: Bed, label: 'Kamar', path: '/admin/rooms' },
   { icon: Building2, label: 'Fasilitas', path: '/admin/facilities' },
   { icon: Wrench, label: 'Layanan', path: '/admin/services' },
-  { icon: Star, label: 'Ulasan', path: '/admin/reviews' },
-  { icon: Settings, label: 'Pengaturan', path: '/admin/settings' },
-];
+    { icon: Star, label: 'Ulasan', path: '/admin/reviews' },
+    { icon: ImageIcon, label: 'Logo Footer', path: '/admin/footer-logos' },
+    { icon: Settings, label: 'Pengaturan', path: '/admin/settings' },
+  ];
 
 const AdminSidebar = () => {
   const location = useLocation();
@@ -94,7 +96,7 @@ const AdminSidebar = () => {
             </div>
             {!collapsed && (
               <div className="overflow-hidden">
-                <h1 className="font-display font-normal text-sm truncate">Grand Master</h1>
+                <h1 className="font-sans font-normal text-sm truncate">Grand Master</h1>
                 <p className="text-xs text-muted-foreground">Admin Panel</p>
               </div>
             )}
