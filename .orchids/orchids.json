@@ -1,0 +1,8 @@
+{
+  "projectId": "caf2042e-c8ac-4b9e-8a84-ee8d3b4aae07",
+  "createdAt": 1767581451098,
+  "version": "1.0",
+  "startupCommands": [
+    "bun install; bun run dev"
+  ]
+}
