@@ -75,9 +75,9 @@ const PromotionsSection = () => {
           <span className="text-gold text-sm font-normal tracking-widest uppercase">
             {sections.promotions.title}
           </span>
-          <h2 className="section-title text-foreground mt-4 mb-6">
+          <h4 className="section-title text-foreground mt-4 mb-6">
             {sections.promotions.subtitle}
-          </h2>
+          </h4>
           <p className="text-muted-foreground">
             Nikmati berbagai penawaran menarik dan paket spesial yang kami siapkan khusus untuk Anda.
           </p>
