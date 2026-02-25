@@ -49,9 +49,9 @@ const LocationSection = () => {
           <span className="text-gold text-sm font-normal tracking-widest uppercase">
             {sections.location.title}
           </span>
-          <h2 className="section-title text-foreground mt-4 mb-6">
+          <h4 className="section-title text-foreground mt-4 mb-6">
             {sections.location.subtitle}
-          </h2>
+          </h4>
           <p className="text-muted-foreground">
             Terletak strategis di pusat kota Purwodadi, mudah dijangkau dari
             berbagai arah.
