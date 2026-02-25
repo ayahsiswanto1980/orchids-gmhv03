@@ -139,9 +139,9 @@ const FacilitiesSection = () => {
           <span className="text-gold text-sm font-normal tracking-widest uppercase">
             {sections.facilities.title}
           </span>
-          <h2 className="section-title text-foreground mt-4 mb-6">
+          <h4 className="section-title text-foreground mt-4 mb-6">
             {sections.facilities.subtitle}
-          </h2>
+          </h4>
           <p className="text-muted-foreground">
             Kami menyediakan berbagai fasilitas kelas dunia untuk memastikan
             pengalaman menginap yang tak terlupakan.
