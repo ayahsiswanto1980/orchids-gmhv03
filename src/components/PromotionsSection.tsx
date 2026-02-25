@@ -77,51 +77,52 @@ const PromotionsSection = () => {
     >
       <div className="container mx-auto px-4">
 
-        {/* Section Header */}
-        <header className="text-center max-w-2xl mx-auto mb-16">
+        {/* HEADER */}
+        <header className="max-w-3xl mx-auto mb-16">
 
           {/* Label */}
-          <span className="block text-gold text-sm tracking-widest uppercase">
+          <span className="block text-center text-gold text-sm tracking-widest uppercase">
             {sections.promotions.title}
           </span>
 
-          {/* Subtitle (semantic fixed → H4) */}
-          <h4
+          {/* Subtitle — smaller, justify */}
+          <h5
             id="promotions-heading"
             className="
               mt-4
               mb-6
               font-sans
               font-medium
-              text-2xl
-              md:text-3xl
-              lg:text-4xl
+              text-lg
+              md:text-xl
+              lg:text-2xl
               text-foreground
-              leading-tight
+              leading-relaxed
+              text-justify
             "
           >
             {sections.promotions.subtitle}
-          </h4>
+          </h5>
 
           {/* Description */}
-          <p className="text-muted-foreground text-base leading-relaxed">
+          <p className="text-center text-muted-foreground text-base leading-relaxed">
             Nikmati berbagai penawaran menarik dan paket spesial yang kami
             siapkan khusus untuk Anda.
           </p>
 
         </header>
 
-        {/* Promotions Grid */}
+        {/* GRID */}
         <div className="grid md:grid-cols-2 gap-8">
 
           {promotions.map((promo, index) => (
             <motion.article
               key={promo.id}
-              initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+              initial={{ opacity: 0, x: index % 2 === 0 ? -40 : 40 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{
-                duration: 0.8,
-                delay: index * 0.2,
+                duration: 0.6,
+                delay: index * 0.15,
               }}
               viewport={{ once: true }}
               className="
@@ -153,7 +154,7 @@ const PromotionsSection = () => {
               {/* Content */}
               <div className="absolute bottom-0 left-0 right-0 p-8">
 
-                <h3 className="text-2xl font-sans font-medium text-cream mb-3">
+                <h3 className="text-xl font-sans font-medium text-cream mb-3">
                   {promo.title}
                 </h3>
 
